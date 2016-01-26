@@ -15,6 +15,13 @@ p {
     line-height: 1.2em;
 }
 
+a {
+    color: #0072bc;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1em;
+}
+
 h1,h2,h3 {
     font-weight: 600;
     margin: 0;
@@ -43,7 +50,7 @@ h3 {
 
 .page-title span {
     display: block;
-    margin: 20px auto;
+    margin: 20px auto 0;
     width: 60px;
     border-bottom: 4px solid #3f4a52;
 }
@@ -238,6 +245,114 @@ section.slogan {
 
 .team .image:hover .egg {
     opacity: 1;
+}
+
+
+/**************** news *******************/
+
+.news .page-title {
+    margin-bottom: 0;
+}
+
+.news-box {
+    position: relative;
+    width: 50%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 40px 60px 0px;
+}
+
+.news-box:nth-of-type(2n+1) {
+    margin-left: 50%;
+    border-left: 1px solid #3f4a52;
+}
+.news-box:nth-of-type(2n) {
+    margin-left: 1px;
+    border-right: 1px solid #3f4a52;
+}
+
+.news-box img {
+    width: 20%;
+}
+
+.news-box .text {
+    width: 80%;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.news-box:nth-of-type(2n) .text {
+    text-align: right;
+    padding: 0 20px 0 0;
+}
+
+.news-box:nth-of-type(2n) img {
+    float: right;
+}
+
+.news-box h3 {
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 1.2em;
+}
+
+.news-box p.top {
+    font-size: 0.8em;
+    margin-bottom: 5px;
+}
+
+.news-box .author {
+    color: #0072bc;
+    font-weight: 600;
+}
+
+.news-box .text p:last-of-type {
+    margin-bottom: 10px;
+}
+
+.calendar-card {
+    position: absolute;
+    background: #3f4a52;
+    color: #ffffff;
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #3f4a52;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    top: 50%;
+    margin-top: -25px;
+    font-size: 0.8em;
+    padding: 5px 0
+}
+
+.calendar-card strong {
+    display: block;
+    margin: auto auto;
+    font-size: 2.4em;
+    line-height: 0.9em;
+    font-weight: 600;
+}
+
+.news-box:nth-of-type(2n+1) .calendar-card {
+    left: -27px;
+}
+
+.news-box:nth-of-type(2n) .calendar-card {
+    right: -27px;
+}
+
+
+.news-end {
+    display:block;
+    margin: auto auto;
+    border-top: 4px solid #3f4a52;
+    width: 60px;
 }
 
 
