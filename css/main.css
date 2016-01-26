@@ -74,7 +74,11 @@ h3 {
 .inline-block {
     display: inline-block;
     vertical-align: middle;
-
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    text-align: center;
+    margin: 0 -2px;
 }
 
 
@@ -106,21 +110,27 @@ h3 {
 
 /****************** slogan **********************/
 
-.logo {
+
+.inline-block.logo {
     width: 100px;
-    height: 40px;
+    height: 100px;
     background: #e1e1e1;
     border: 10px solid #ffffff;
     -webkit-border-radius: 100px;
     -moz-border-radius: 100px;
     border-radius: 100px;
     text-align: center;
-    padding: 30px 0px;
-    margin: 0 30px 20px 0;
+    padding: 26px 0px;
+    margin: 0 30px 0px 60px;
 }
 
-.logo img {
+.inline-block.logo img {
     width: 70%
+}
+
+.inline-block.slogan {
+    width: 70%;
+    text-align: left;
 }
 
 .slogan h1 {
@@ -130,15 +140,11 @@ h3 {
 
 /******************* about us *********************/
 
-.inline-block {
+
+.about-us .inline-block, .technologies .inline-block {
     width: 33.3333%;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    padding: 20px 40px;
-    text-align: center;
-    margin: 0 -2px;
     vertical-align: top;
+    padding: 20px 40px;
 
 }
 
@@ -153,7 +159,7 @@ h3 {
 .technologies {
     background: url('../img/tech-bg.png') no-repeat center center;
     background-attachment: fixed;
-    background-size: cover;
+    background-size: 100%;
 }
 
 .technologies h2 {
@@ -176,10 +182,10 @@ h3 {
 
 
 @media screen and (max-width: 768px) {
-    .logo {margin: 20px auto; display: block;}
+    .inline-block.logo {margin: 20px auto; display: block;}
     .slogan {text-align: center}
 
-    .about-us .inline-block {
+    .inline-block {
         width: 100%
     }
 }
