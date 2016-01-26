@@ -1,0 +1,168 @@
+body, html {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+}
+
+section {
+    position: relative
+}
+
+p {
+    margin: 0;
+    padding: 0;
+    line-height: 1.2em;
+}
+
+h1,h2,h3 {
+    font-weight: 600;
+    margin: 0;
+    padding:0;
+}
+
+h1 {
+    font-size: 2em;
+    line-height: 1em;
+}
+
+h3 {
+    font-size: 1em;
+    line-height: 1em;
+    font-weight: 600;
+    margin-bottom: 10px;
+
+}
+
+.page-title {
+    font-weight: 400;
+    font-size: 1.6em;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.page-title span {
+    display: block;
+    margin: 20px auto;
+    width: 60px;
+    border-bottom: 4px solid #3f4a52;
+}
+
+.dark-theme .page-title span {
+    border-color: #ffffff;
+}
+
+.page-width {
+    width:1200px;
+    max-width: 100%;
+    margin: auto auto;
+    padding: 40px 20px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.dark-theme {
+    background: #3f4a52;
+    color: #ffffff;
+}
+
+.light-theme {
+    color: #3f4a52
+}
+
+.inline-block {
+    display: inline-block;
+    vertical-align: middle;
+
+}
+
+
+.btn {
+    display: block;
+    line-height: 1.4em;
+    color: #0072bc;
+    background: none;
+    border: 1px solid #0072bc;
+    font-size: 1.2em;
+    padding: 10px 20px;
+    margin: 30px auto 10px;
+    outline: none;
+}
+
+.btn:hover {
+    background: #0072bc;
+    color: #ffffff
+}
+
+
+/****************** main website ********************/
+
+.hover-image {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+/****************** slogan **********************/
+
+.logo {
+    width: 100px;
+    height: 40px;
+    background: #e1e1e1;
+    border: 10px solid #ffffff;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+    text-align: center;
+    padding: 30px 0px;
+    margin: 0 30px 20px 0;
+}
+
+.logo img {
+    width: 70%
+}
+
+.slogan h1 {
+    margin-bottom: 20px;
+}
+
+
+/******************* about us *********************/
+
+.inline-block {
+    width: 33.3333%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 20px 40px;
+    text-align: center;
+    margin: 0 -2px;
+    vertical-align: top;
+
+}
+
+.inline-block img {
+    width: 50%;
+    margin-bottom: 20px;
+}
+
+
+/***************** technologies *****************/
+
+.technologies {
+    background: url('../img/tech-bg.png') no-repeat center center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    .logo {margin: 20px auto; display: block;}
+    .slogan {text-align: center}
+
+    .about-us .inline-block {
+        width: 100%
+    }
+}
