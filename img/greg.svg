@@ -20,6 +20,35 @@
 	.st14{fill:#3F4A52;}
 	.st15{font-family:'OpenSans';}
 	.st16{font-size:37.0706px;}
+
+
+    #eye1, #eye2 {
+        animation: eyes 3s infinite step-start 0s;
+    }
+
+    #cheek {
+        animation-name: chew;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-out;
+        transform-origin: right bottom;
+        animation-fill-mode: backwards;
+    }
+    @keyframes eyes {
+        0%, 100% {
+            opacity: 0;
+        }
+
+        5%, 98% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes chew {
+        0%, 100% { transform: rotate(0deg) scaleX(1) }
+        5%, 60% { transform: rotate(-5deg) scaleX(0.8) }
+
+    }
 </style>
 <polygon class="st0" points="-1.7,0 2480,0 2480,835.2 0,835.2 "/>
 <path class="st1" d="M2480,835.2V451.7c0,0-331.7-18.7-580.4-11.9c-248.8,6.8-725.6,52.9-911.5,86.9c-49.4,9-357,78.2-608.2,158.5

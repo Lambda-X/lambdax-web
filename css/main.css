@@ -119,6 +119,10 @@ h3 {
 
 /****************** slogan **********************/
 
+section.slogan {
+    padding-bottom: 20px;
+}
+
 
 .inline-block.logo {
     width: 100px;
