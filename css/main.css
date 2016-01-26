@@ -156,6 +156,23 @@ h3 {
     background-size: cover;
 }
 
+.technologies h2 {
+    text-transform: uppercase;
+}
+
+
+/**************** projects ********************/
+
+.projects .inline-block{
+    width: 50%;
+}
+
+.tags {
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+
 
 
 @media screen and (max-width: 768px) {
