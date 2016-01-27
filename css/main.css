@@ -87,6 +87,7 @@ h3 {
     text-align: center;
     margin: 0 -2px;
 }
+.clearfix { clear: both}
 
 
 .btn {
@@ -355,6 +356,118 @@ section.slogan {
     width: 60px;
 }
 
+/***************** contact *******************/
+
+.contact .page-width {
+    position: relative;
+}
+
+.contact img {
+    width: 350px;
+    position: absolute;
+    left: 50px;
+    top: 20px;
+}
+
+.contact h2 {
+    font-weight: 300;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.contact p {
+    margin-bottom: 30px;
+}
+
+.socials a {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    font-size: 40px;
+    line-height: 60px;
+    background: #ffffff;
+    border-radius: 4em;
+    color: #3f4a52;
+    margin: 0 10px;
+}
+
+.socials a:hover {
+    background: #0072bc;
+    color: #ffffff;
+}
+
+input {
+    background: none;
+    border: none;
+    border-bottom: 1px solid #ffffff;
+    font-size: 1em;
+    line-height: 1.6em;
+    margin-bottom: 20px;
+    padding: 0 10px 5px;
+    width: 40%;
+    outline: none;
+    font-family: 'Open Sans';
+    font-weight: 300;
+}
+
+input:first-of-type {
+    margin-right: 10px;
+}
+
+textarea {
+    color: #ffffff;
+    padding: 0 10px;
+    border: none;
+    resize: none;
+    height: 140px;
+    font-weight: 300;
+    outline: none;
+    border: none;
+    display: block;
+    font-size: 1em;
+    line-height: 29px;
+    margin: 2% auto;
+    padding: 0px 20px 0 10px;
+    resize: none;
+    height: 140px;
+    font-family: 'Open Sans';
+    width: 100%;
+    background-color: #3f4a52;
+    background-image: -moz-linear-gradient(top , transparent, transparent 29px,#ffffff 0px);
+    background-image: -webkit-linear-gradient(top , transparent, transparent 29px,#ffffff 0);
+    -webkit-background-size:  100% 30px;
+    background-size: 100% 30px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+input[type="submit"].btn {
+    float: right;
+    width: auto;
+    margin-top: 10px;
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #ffffff;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #ffffff;
+    opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #ffffff;
+    opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color:    #ffffff;
+}
+:placeholder-shown { /* Standard (https://drafts.csswg.org/selectors-4/#placeholder) */
+    color:    #ffffff;
+}
+
+
 
 /***** greg ****/
 
@@ -393,5 +506,14 @@ section.slogan {
 
     .news .page-title {
         margin-bottom: 30px;
+    }
+
+    .contact {text-align: center}
+    .contact .inline-block:first-of-type { display: none}
+    .contact img {
+        position: relative;
+        margin: auto auto;
+        left: initial;
+        top: initial;
     }
 }
