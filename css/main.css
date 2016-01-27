@@ -356,13 +356,42 @@ section.slogan {
 }
 
 
+/***** greg ****/
+
+
 @media screen and (max-width: 768px) {
     .inline-block.logo {margin: 20px auto; display: block;}
-    .slogan {text-align: center}
+    .inline-block.slogan {text-align: center; width: 100% }
 
-    .three-part .inline-block {
-        width: 100%
+    .three-part .inline-block, .projects .inline-block {
+        width: 100%;
+        margin-bottom: 30px;
     }
 
     .team .rp-container { padding: 0}
+
+    .news-box, .news-box:nth-of-type(2n), .news-box:nth-of-type(2n+1) {
+        width: 100%;
+        margin: 0 0 30px 0;
+        border: 0;
+        padding: 10px;
+        text-align: left
+    }
+
+    .news-box:nth-of-type(2n) .text {
+        text-align: left;
+        padding: 0 0 0 20px
+    }
+
+    .news-box:nth-of-type(2n) img {
+        float: left;
+    }
+
+    .news-box .calendar-card {
+        display: none
+    }
+
+    .news .page-title {
+        margin-bottom: 30px;
+    }
 }
