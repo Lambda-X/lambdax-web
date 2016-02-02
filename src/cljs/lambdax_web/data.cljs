@@ -13,8 +13,7 @@
                {:title "We are ready to help you"
                 :img {:src "img/icon-contact.svg"
                       :alt "Our culture"}
-                :content {:type :button
-                          :class "btn contact-us"
+                :content {:type :button 
                           :text "contact us"}}])
 
 (def technologies [{:name "ClojureScript"

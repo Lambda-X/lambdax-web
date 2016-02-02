@@ -1,6 +1,7 @@
 (ns lambdax-web.views
   (:require [om.dom :as dom]
-            [om.next :as om :refer-macros [defui]]))
+            [om.next :as om :refer-macros [defui]]
+            [clojure.string :refer [join split]]))
 
 (defn render-main-section []
   (dom/section #js {:id "main" :className "full-width"}
@@ -60,7 +61,13 @@
                      (dom/h3 nil title)
                      (if (= (:type content) :text)
                        (dom/p nil (:text content))
-                       (dom/button (clj->js {:className (:className content)})
+                       (dom/button (clj->js {:className (-> content
+                                                            :text
+                                                            (split #"\s+")
+                                                            (as-> content-text
+                                                                (->> content-text
+                                                                     (join "-")
+                                                                     (str "btn "))))})
                                    (:text content)))))))
 
 (def render-about-us (om/factory RenderAboutUs))
