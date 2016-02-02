@@ -49,7 +49,7 @@
                                           (dom/div #js {:className "clearfix"})))
                         (dom/img #js {:src "img/greg-contact.svg" :alt "Greg"}))))
 
-(defui RenderAboutUs
+(defui AboutUs
   static om/IQuery
   (query [this]
          [:title :img :content])
@@ -70,8 +70,7 @@
                                                                      (str "btn "))))})
                                    (:text content)))))))
 
-(def render-about-us (om/factory RenderAboutUs))
-
+(def render-about-us (om/factory AboutUs))
 
 (defui Technologies
   static om/IQuery
@@ -142,14 +141,30 @@
 
 (def render-news (om/factory News))
 
-(defui RenderSection
+(def ^:private section->content
+  {:about-us render-about-us
+   :technologies render-technologies
+   :projects render-projects
+   :team render-team
+   :news render-news})
+
+(defui Section
+  static om/Ident
+  (ident [this {:keys [section-name]}]
+         [:section/by-name section-name])
   static om/IQuery
   (query [this]
-         [:name :title :parts :theme :content])
+         (zipmap [:about-us :technologies :projects :team :news]
+                 (map #(conj [:section-name :title :parts :theme] {:content %})
+                      [(om/get-query AboutUs)
+                       (om/get-query Technologies)
+                       (om/get-query Projects)
+                       (om/get-query Team)
+                       (om/get-query News)])))
   Object
   (render [this]
-          (let [{:keys [name title parts theme content]} (om/props this)]
-            (dom/section (clj->js {:id name :className (str theme " " name)})
+          (let [{:keys [section-name title parts theme content]} (om/props this)]
+            (dom/section (clj->js {:id (name section-name) :className (str theme " " (name section-name))})
                          (dom/div #js {:className "page-width"}
                                   (dom/h1 #js {:className "page-title"}
                                           title)
@@ -157,23 +172,21 @@
                                                      (if parts
                                                        "rp-container three-part"
                                                        "rp-container")})
-                                           (cond (= name "about-us") (map render-about-us content)
-                                                 (= name "technologies") (map render-technologies content)
-                                                 (= name "projects") (map render-projects content)
-                                                 (= name "team") (map render-team content)
-                                                 (= name "news") (map render-news content))))))))
+                                           (map (get section->content section-name) content)))))))
 
-(def render-section (om/factory RenderSection))
+(def render-section (om/factory Section))
 
 (defui RootView
   static om/IQuery
   (query [this]
-         [:sections])
+         [{:sections (om/get-query Section)}])
   Object
   (render [this]
           (let [{:keys [sections]} (om/props this)]
             (dom/div #js {:id "main-div"}
                      (render-main-section)
                      (render-slogan-section)
-                     (map render-section sections)
+                     (map #(render-section (assoc %1 :theme %2))
+                          sections
+                          (cycle '("light-theme" "dark-theme")))
                      (render-footer-section)))))

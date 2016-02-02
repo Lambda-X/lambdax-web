@@ -6,13 +6,15 @@
 
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.clojure/clojurescript "1.7.170"]
-                 [org.omcljs/om "1.0.0-alpha22"]
+                 [org.omcljs/om "1.0.0-alpha28"]
                  [figwheel-sidecar "0.5.0-SNAPSHOT" :scope "test"]
                  [twitter-api "0.7.8"]
                  [com.stuartsierra/component "0.3.1"]
                  [overtone/at-at "1.2.0"]
                  [org.clojars.scsibug/feedparser-clj "0.4.0"]
-                 [clj-time "0.11.0"]]
+                 [clj-time "0.11.0"]
+                 [http-kit "2.1.18"]
+                 [org.clojure/core.async "0.2.371" :scope "test"]]
 
   :plugins [[lein-cljsbuild "1.1.1"]
             [lein-figwheel "0.5.0-3"]]
