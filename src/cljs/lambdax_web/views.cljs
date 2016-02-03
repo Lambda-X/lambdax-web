@@ -1,7 +1,23 @@
 (ns lambdax-web.views
   (:require [om.dom :as dom]
             [om.next :as om :refer-macros [defui]]
-            [clojure.string :refer [join split]]))
+            [clojure.string :refer [join split]]
+            [cljs-time.core :as t]
+            [cljs-time.coerce :as c]))
+
+(def ^:private number->month
+  {1 "JAN"
+   2 "FEB"
+   3 "MAR"
+   4 "APR"
+   5 "MAY"
+   6 "JUNE"
+   7 "JULY"
+   8 "AUG"
+   9 "SEPT"
+   10 "OCT"
+   11 "NOV"
+   12 "DEC"})
 
 (defn render-main-section []
   (dom/section #js {:id "main" :className "full-width"}
@@ -119,10 +135,11 @@
 (defui News
   static om/IQuery
   (query [this]
-         [:title :text :month :day :type :author :img :link])
+         [:title :text :date :type :author :img :link])
   Object
   (render [this]
-          (let [{:keys [title text month day type author img link]} (om/props this)]
+          (let [{:keys [title text date type author img link]} (om/props this)
+                date (c/from-date date)]
             (dom/div #js {:className "news-box"}
                      (dom/img (clj->js {:src (:src img) :alt (:alt img) :className "inline-block"}))
                      (dom/div #js {:className "inline-block text"}
@@ -136,8 +153,10 @@
                               (dom/a (clj->js {:href (:href link) :title (:title link)})
                                      (:text link)))
                      (dom/span #js {:className "calendar-card"}
-                               (dom/strong nil day)
-                               month)))))
+                               (dom/strong nil (t/day date))
+                               (->> date
+                                    t/month
+                                    (get number->month)))))))
 
 (def render-news (om/factory News))
 

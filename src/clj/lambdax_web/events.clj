@@ -1,11 +1,10 @@
-(ns lambdax-web.core
+(ns lambdax-web.events
   (:require [lambdax-web.twitter-feed :as tf]
             [lambdax-web.rss-blog :as rss]
-            [com.stuartsierra.component :as component]
-            [overtone.at-at :refer :all]
             [clj-time.core :as t]
-            [clj-time.format :as f]
             [clj-time.coerce :as c]))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (def twitter-user "scalac_io")
 
@@ -29,16 +28,3 @@
            (tf/last-tweets 3 twitter-user)
            (concat (tf/last-tweets 2 twitter-user) last-blog-post))
          (sort-by :created_at))))
-
-;; SCHEDULER
-
-(def my-pool (mk-pool))
-
-(defn run-scheduler! [time-in-ms]
-  (every time-in-ms #(last-3-events) my-pool))
-
-(defn stop-and-reset-scheduler! []
-  (stop-and-reset-pool! my-pool))
-
-(defn kill-scheduler! []
-  (stop-and-reset-pool! my-pool :strategy :kill))

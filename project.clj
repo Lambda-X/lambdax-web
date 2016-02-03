@@ -6,6 +6,7 @@
 
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.clojure/clojurescript "1.7.170"]
+                 [org.clojure/core.async "0.2.371" :scope "test"]
                  [org.omcljs/om "1.0.0-alpha28"]
                  [figwheel-sidecar "0.5.0-SNAPSHOT" :scope "test"]
                  [twitter-api "0.7.8"]
@@ -13,13 +14,22 @@
                  [overtone/at-at "1.2.0"]
                  [org.clojars.scsibug/feedparser-clj "0.4.0"]
                  [clj-time "0.11.0"]
+                 [com.andrewmcveigh/cljs-time "0.4.0"]
                  [http-kit "2.1.18"]
-                 [org.clojure/core.async "0.2.371" :scope "test"]]
+                 [ring/ring-core "1.4.0"]
+                 [bidi "1.21.1"]]
 
   :plugins [[lein-cljsbuild "1.1.1"]
             [lein-figwheel "0.5.0-3"]]
 
   :source-paths ["src/clj" "src/cljs" "test/clj" "test/cljs"]
+
+  :main ^:skip-aot lambdax-web.core
+
+  :profiles {:uberjar {:aot :all}
+             :dev {:source-paths ["src/dev"]
+                   :dependencies [[org.clojure/tools.namespace "0.2.11"]]
+                   :repl-options {:init-ns lambdax-web.dev}}}
 
   :clean-targets ^{:protect false} ["resources/public/js/compiled" "target"]
 

@@ -24,8 +24,7 @@
                           :alt "Clojure"}}
                    {:name "ClojureScript"
                     :img {:src "img/cljs.svg"
-                          :alt "Clojure"}}
-                   ])
+                          :alt "Clojure"}}])
 
 (def projects [{:title "Replumb is a plumbing library for your self-hosted
               ClojureScript Read-Eval-Print-Loops."
@@ -55,8 +54,7 @@
             :text "Some random tekst goes here. Some random tekst
                    goes here. Some random tekst goes here. Some
                    random tekst goes here. Some random tekst goes here."
-            :month "JUN"
-            :day "30"
+            :date #inst "2016-02-03T15:08:47.000-00:00"
             :type "BLOG POST"
             :author "Andrea.Richiardi"
             :img {:src "img/news.png"
@@ -68,8 +66,7 @@
             :text "Some random tekst goes here. Some random tekst
                    goes here. Some random tekst goes here. Some
                    random tekst goes here. Some random tekst goes here."
-            :month "JUN"
-            :day "30"
+            :date #inst "2016-02-03T15:08:47.000-00:00"
             :type "BLOG POST"
             :author "Andrea.Richiardi"
             :img {:src "img/news.png"
@@ -81,8 +78,7 @@
             :text "Some random tekst goes here. Some random tekst
                    goes here. Some random tekst goes here. Some
                    random tekst goes here. Some random tekst goes here."
-            :month "JUN"
-            :day "30"
+            :date #inst "2016-02-03T15:08:47.000-00:00"
             :type "BLOG POST"
             :author "Andrea.Richiardi"
             :img {:src "img/news.png"
