@@ -126,10 +126,20 @@ h3 {
     display: block;
 }
 
+#main {
+    max-height: 600px;
+    overflow: hidden
+}
+
+#main img {
+
+}
+
 /****************** slogan **********************/
 
 section.slogan {
     padding-bottom: 20px;
+    text-align: center
 }
 
 
@@ -151,7 +161,6 @@ section.slogan {
 }
 
 .inline-block.slogan {
-    width: 70%;
     text-align: left;
 }
 
@@ -179,9 +188,9 @@ section.slogan {
 /***************** technologies *****************/
 
 .technologies {
-    background: url('../img/tech-bg.png') no-repeat center center;
+    background: #3f4a52 url('../img/greg-working.svg') no-repeat right center;
     background-attachment: fixed;
-    background-size: cover;
+    background-size: 80%;
 }
 
 .technologies h2 {
