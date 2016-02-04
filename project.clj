@@ -14,6 +14,8 @@
                  [overtone/at-at "1.2.0"]
                  [org.clojars.scsibug/feedparser-clj "0.4.0"]
                  [clj-time "0.11.0"]
+                 [com.cognitect/transit-clj "0.8.285"]
+                 [com.cognitect/transit-cljs "0.8.237"]
                  [com.andrewmcveigh/cljs-time "0.4.0"]
                  [http-kit "2.1.18"]
                  [ring/ring-core "1.4.0"]

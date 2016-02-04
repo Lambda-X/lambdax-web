@@ -21,4 +21,6 @@
             :text (:value (first contents))
             :date updated-date
             :type "BLOG POST"
-            :link link}))))
+            :link link
+            :img {:src "img/news.png"
+                  :alt "news"}}))))

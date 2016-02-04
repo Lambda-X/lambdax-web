@@ -59,9 +59,7 @@
             :author "Andrea.Richiardi"
             :img {:src "img/news.png"
                   :alt "news"}
-            :link {:href "#"
-                   :title "more"
-                   :text "read more"}}
+            :link "#"}
            {:title "How awesome Clojure is!"
             :text "Some random tekst goes here. Some random tekst
                    goes here. Some random tekst goes here. Some
@@ -71,9 +69,7 @@
             :author "Andrea.Richiardi"
             :img {:src "img/news.png"
                   :alt "news"}
-            :link {:href "#"
-                   :title "more"
-                   :text "read-more"}}
+            :link "#"}
            {:title "How awesome Clojure is!"
             :text "Some random tekst goes here. Some random tekst
                    goes here. Some random tekst goes here. Some
@@ -83,9 +79,7 @@
             :author "Andrea.Richiardi"
             :img {:src "img/news.png"
                   :alt "news"}
-            :link {:href "#"
-                   :title "more"
-                   :text "read-more"}}])
+            :link "#"}])
 
 (def sections [{:section-name :about-us
                 :title "About us"
@@ -106,6 +100,6 @@
                {:section-name :news
                 :title "Latest news"
                 :parts false
-                :content news}])
+                :content []}])
 
 (def application-state {:sections sections})

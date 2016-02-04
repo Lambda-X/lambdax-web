@@ -3,6 +3,8 @@
             [bidi.bidi :as bidi]
             [ring.util.response :refer [resource-response]]
             [ring.middleware.resource :refer [wrap-resource]]
+            [ring.middleware.content-type :refer [wrap-content-type]]
+            [ring.middleware.not-modified :refer [wrap-not-modified]]
             [lambdax-web.util :as util]
             [com.stuartsierra.component :as component]))
 
@@ -48,7 +50,9 @@
 (defn dev-handler [app-state]
   (fn [req]
     ((-> (prod-handler app-state)
-         (wrap-resource "public"))
+         (wrap-resource "public")
+         wrap-content-type
+         wrap-not-modified)
      req)))
 
 ;; Server

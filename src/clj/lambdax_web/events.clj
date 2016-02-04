@@ -4,8 +4,6 @@
             [clj-time.core :as t]
             [clj-time.coerce :as c]))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (def twitter-user "scalac_io")
 
 (def blog-rss "http://blog.scalac.io/feeds/index.xml")

@@ -146,12 +146,13 @@
                               (dom/p #js {:className "top"}
                                      (dom/span #js {:className "type"}
                                                type)
+                                     " by "
                                      (dom/span #js {:className "author"}
                                                author))
                               (dom/h3 nil title)
                               (dom/p nil text)
-                              (dom/a (clj->js {:href (:href link) :title (:title link)})
-                                     (:text link)))
+                              (dom/a (clj->js {:href link :title "more"})
+                                     "read-more"))
                      (dom/span #js {:className "calendar-card"}
                                (dom/strong nil (t/day date))
                                (->> date

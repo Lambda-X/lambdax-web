@@ -1,6 +1,7 @@
 (ns lambdax-web.twitter-feed
   (:require [twitter.oauth :refer [make-oauth-creds]]
-            [twitter.api.restful :refer [statuses-user-timeline]])
+            [twitter.api.restful :refer [statuses-user-timeline]]
+            [clojure.string :as string])
   (:import [java.text SimpleDateFormat]))
 
 (def TwitterDateFormat (SimpleDateFormat. "EEE MMM d HH:mm:ss Z yyyy"))
@@ -18,7 +19,7 @@
                                 acess-token
                                 acess-token-secret))
 
-(def keys-to-select [:text :created_at :screen-name :user])
+(def keys-to-select [:text :created_at :screen-name :entities])
 
 (defn get-user-screen [user]
   (statuses-user-timeline :oauth-creds my-creds :params {:screen-name user}))
@@ -29,11 +30,13 @@
        :body
        (take number-of-tweets)
        (map
-        #(let [{:keys [text created_at screen-name user]}
+        #(let [{:keys [text created_at screen-name entities]}
                (select-keys % keys-to-select)]
            {:author (str "@" user-name)
             :title "TWITTER NEWS!"
-            :text text
+            :text (string/join " " (-> text (string/split #" ") butlast))
             :date (.parse TwitterDateFormat created_at)
             :type "TWEET"
-            :link (:url user)}))))
+            :link (-> entities :media first :url)
+            :img {:src "img/news.png"
+                  :alt "news"}}))))
