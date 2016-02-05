@@ -37,6 +37,6 @@
                     "TWITTER NEWS!"
                     (string/join " " (-> text (string/split #" ") butlast))
                     (.parse TwitterDateFormat created_at)
-                    "TWEET"
+                    :tweet
                     (-> entities :media first :url)
                     {:src "img/news.png" :alt "news"})))))

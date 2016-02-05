@@ -21,7 +21,7 @@
                     title
                     (:value (first contents))
                     published-date
-                    "BLOG POST"
+                    :blog-post
                     link
                     {:src "img/news.png"
                      :alt "news"})))))

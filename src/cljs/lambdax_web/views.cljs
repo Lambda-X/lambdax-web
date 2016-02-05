@@ -1,7 +1,7 @@
 (ns lambdax-web.views
   (:require [om.dom :as dom]
             [om.next :as om :refer-macros [defui]]
-            [clojure.string :refer [join split]]
+            [clojure.string :refer [join split upper-case]]
             [cljs-time.core :as t]
             [cljs-time.coerce :as c]))
 
@@ -145,7 +145,10 @@
                      (dom/div #js {:className "inline-block text"}
                               (dom/p #js {:className "top"}
                                      (dom/span #js {:className "type"}
-                                               type)
+                                               (join " " (-> type
+                                                             name
+                                                             upper-case
+                                                             (split #"-"))))
                                      " by "
                                      (dom/span #js {:className "author"}
                                                author))
