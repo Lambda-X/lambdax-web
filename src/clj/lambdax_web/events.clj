@@ -25,4 +25,4 @@
     (->> (if (older-than-month? last-blog-post)
            (tf/last-tweets 3 twitter-user)
            (concat (tf/last-tweets 2 twitter-user) last-blog-post))
-         (sort-by :created_at))))
+         (sort-by :date))))
