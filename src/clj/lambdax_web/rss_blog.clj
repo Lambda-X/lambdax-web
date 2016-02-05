@@ -1,12 +1,13 @@
 (ns lambdax-web.rss-blog
-  (require [feedparser-clj.core :refer :all]))
+  (require [feedparser-clj.core :refer :all]
+           [lambdax-web.event-record :refer :all]))
 
 (defn rss-feeds
   "Getting all rss feeds from blog"
   [rss-url]
   (parse-feed rss-url))
 
-(def keys-to-select [:authors :link :title :updated-date :contents])
+(def keys-to-select [:authors :link :title :published-date :contents])
 
 (defn last-statuses [number-of-statuses rss-url]
   (->> rss-url
@@ -14,13 +15,13 @@
        :entries
        (take number-of-statuses)
        (map
-        #(let [{:keys [authors title link contents updated-date]}
+        #(let [{:keys [authors title link contents published-date]}
                (select-keys % keys-to-select)]
-           {:author (:name (first authors))
-            :title title
-            :text (:value (first contents))
-            :date updated-date
-            :type "BLOG POST"
-            :link link
-            :img {:src "img/news.png"
-                  :alt "news"}}))))
+           (->Event (:name (first authors))
+                    title
+                    (:value (first contents))
+                    published-date
+                    "BLOG POST"
+                    link
+                    {:src "img/news.png"
+                     :alt "news"})))))

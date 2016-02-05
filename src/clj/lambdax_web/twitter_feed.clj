@@ -1,7 +1,8 @@
 (ns lambdax-web.twitter-feed
   (:require [twitter.oauth :refer [make-oauth-creds]]
             [twitter.api.restful :refer [statuses-user-timeline]]
-            [clojure.string :as string])
+            [clojure.string :as string]
+            [lambdax-web.event-record :refer :all])
   (:import [java.text SimpleDateFormat]))
 
 (def TwitterDateFormat (SimpleDateFormat. "EEE MMM d HH:mm:ss Z yyyy"))
@@ -32,11 +33,10 @@
        (map
         #(let [{:keys [text created_at screen-name entities]}
                (select-keys % keys-to-select)]
-           {:author (str "@" user-name)
-            :title "TWITTER NEWS!"
-            :text (string/join " " (-> text (string/split #" ") butlast))
-            :date (.parse TwitterDateFormat created_at)
-            :type "TWEET"
-            :link (-> entities :media first :url)
-            :img {:src "img/news.png"
-                  :alt "news"}}))))
+           (->Event (str "@" user-name)
+                    "TWITTER NEWS!"
+                    (string/join " " (-> text (string/split #" ") butlast))
+                    (.parse TwitterDateFormat created_at)
+                    "TWEET"
+                    (-> entities :media first :url)
+                    {:src "img/news.png" :alt "news"})))))
