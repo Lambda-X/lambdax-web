@@ -21,7 +21,7 @@
 
 (defn render-main-section []
   (dom/section #js {:id "main" :className "full-width"}
-               (dom/img #js {:src "img/greg.svg"
+               (dom/object #js {:data "img/greg.svg"
                              :alt "Greg the programmer"})
                (dom/img #js {:src "img/over-greg.svg"
                              :alt "over"

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.2.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Warstwa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 367.7 334.3" style="enable-background:new 0 0 367.7 334.3;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill-rule:evenodd;clip-rule:evenodd;fill:#292E30;}
+	.st1{fill-rule:evenodd;clip-rule:evenodd;fill:#5A91C4;}
+	.st2{fill-rule:evenodd;clip-rule:evenodd;fill:#FBB217;}
+	.st3{fill-rule:evenodd;clip-rule:evenodd;fill:#D33E38;}
+	.st4{fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;}
+	.st5{fill:#FBB217;}
+	.st6{font-family:'OpenSans-Extrabold';}
+	.st7{font-size:18px;}
+	.st8{fill-rule:evenodd;clip-rule:evenodd;fill:#F8A81A;}
+</style>
+<rect x="35.5" y="259.3" class="st0" width="297.3" height="46"/>
+<g id="books">
+	<g>
+		
+			<rect x="181.3" y="69.2" transform="matrix(0.9936 -0.1127 0.1127 0.9936 -17.1184 23.9302)" class="st1" width="43.6" height="188.3"/>
+		
+			<rect x="182.9" y="85.3" transform="matrix(0.9936 -0.1127 0.1127 0.9936 -10.3851 22.7815)" class="st2" width="26.7" height="35.8"/>
+		
+			<rect x="192.7" y="132.9" transform="matrix(0.9936 -0.1128 0.1128 0.9936 -20.1132 23.5097)" class="st2" width="10.2" height="113.4"/>
+		
+			<rect x="209" y="131" transform="matrix(0.9936 -0.1127 0.1127 0.9936 -19.7854 25.3213)" class="st2" width="10.2" height="113.4"/>
+	</g>
+	<g>
+		
+			<rect x="226.8" y="98.8" transform="matrix(0.9936 -0.1127 0.1127 0.9936 -18.5563 28.5809)" class="st3" width="33.3" height="159.3"/>
+		
+			<rect x="232.7" y="116.4" transform="matrix(0.9936 -0.1127 0.1127 0.9936 -14.5775 27.8957)" class="st1" width="13.6" height="53"/>
+		
+			<rect x="240.3" y="178.5" transform="matrix(0.9936 -0.1127 0.1127 0.9936 -21.5312 29.1474)" class="st4" width="13.6" height="53"/>
+	</g>
+	<g>
+		<rect x="62.3" y="57.1" class="st3" width="52.2" height="202.3"/>
+		<text transform="matrix(1.135841e-02 -0.6275 0.9998 1.809836e-02 91.9032 243.0475)" class="st5 st6 st7">FUNCTIONAL PROGRAMMING</text>
+	</g>
+	<g>
+		<rect x="114.6" y="100.1" class="st8" width="33.3" height="159.3"/>
+		<rect x="114.6" y="100.1" class="st1" width="33.3" height="14.8"/>
+		<rect x="126.2" y="121.6" class="st4" width="10" height="127.5"/>
+	</g>
+	<g>
+		<rect x="147.8" y="12.9" class="st3" width="21.8" height="246.4"/>
+		<rect x="153.1" y="20.7" class="st4" width="11.3" height="20.6"/>
+		<rect x="153.1" y="47.8" class="st4" width="11.3" height="20.6"/>
+		<rect x="153.1" y="74.8" class="st4" width="11.3" height="20.6"/>
+	</g>
+</g>
+</svg>

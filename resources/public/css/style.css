@@ -188,7 +188,7 @@ section.slogan {
 /***************** technologies *****************/
 
 .technologies {
-    background: #3f4a52 url('../img/greg-working.svg') no-repeat right center;
+    background: #3f4a52 url('../img/greg-working.svg') no-repeat right bottom;
     background-attachment: fixed;
     background-size: 80%;
 }
@@ -197,6 +197,13 @@ section.slogan {
     text-transform: uppercase;
 }
 
+
+.books {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 200px
+}
 
 /**************** projects ********************/
 
@@ -485,6 +492,11 @@ input[type="submit"].btn {
 @media screen and (max-width: 768px) {
     .inline-block.logo {margin: 20px auto; display: block;}
     .inline-block.slogan {text-align: center; width: 100% }
+
+    .technologies {
+        background-size: cover;
+        background-position: right bottom;
+    }
 
     .three-part .inline-block, .projects .inline-block {
         width: 100%;
