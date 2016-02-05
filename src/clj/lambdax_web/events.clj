@@ -6,7 +6,7 @@
 
 (def twitter-user "scalac_io")
 
-(def blog-rss "http://blog.scalac.io/feeds/index.xml")
+(def blog-rss "http://lambdax-blog-devel.scalac.io/blog/feed.xml")
 
 ;; Last events
 
