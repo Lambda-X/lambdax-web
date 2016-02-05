@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 19.2.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="greg-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 2480 835.2" style="enable-background:new 0 0 2480 835.2;" xml:space="preserve">
 <style type="text/css">
@@ -145,9 +144,7 @@
 			</g>
 		</g>
 	</g>
-	<text transform="matrix(1 0 0 1 1222.2096 256.5284)" class="st9 st10 st11">meet Greg</text>
-	<text id="hidden" transform="matrix(1 0 0 1 219.1328 420.7649)" class="st9 st10 st11">he is not an ordinary llama</text>
 	<text transform="matrix(1 0 0 1 1483.4316 223.0579)" class="st5 st12 st13">meet Greg</text>
-	<text transform="matrix(1 0 0 1 1375.755 288.9009)" class="st14 st15 st16">he is not an ordinary llama</text>
+	<text id="hidden-text" transform="matrix(1 0 0 1 1375.755 288.9009)" class="st14 st15 st16">he is not an ordinary llama</text>
 </g>
 </svg>

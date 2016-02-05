@@ -22,7 +22,9 @@
 (defn render-main-section []
   (dom/section #js {:id "main" :className "full-width"}
                (dom/object #js {:data "img/greg.svg"
-                             :alt "Greg the programmer"})
+                             :id "greg-svg"
+                             :alt "Greg the programmer"
+                             :type "image/svg+xml"})
                (dom/img #js {:src "img/over-greg.svg"
                              :alt "over"
                              :className "hover-image"})))
