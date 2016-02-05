@@ -6,9 +6,9 @@
 
 (defn dev-system [{:keys [web-port] :as config}]
   (component/system-map
-   :app-state (atom {:feeds []})
+   :app-state (atom {:events []})
    :scheduler (component/using
-               (scheduler/new-scheduler #(swap! % assoc :feeds (events/last-3-events))
+               (scheduler/new-scheduler #(swap! % assoc :events (events/last-3-events))
                                         5000)
                [:app-state])
    :webserver (component/using
@@ -17,9 +17,9 @@
 
 (defn prod-system [{:keys [web-port] :as config}]
   (component/system-map
-   :app-state (atom {:feeds []})
+   :app-state (atom {:events []})
    :scheduler (component/using
-               (scheduler/new-scheduler #(swap! % assoc :feeds (events/last-3-events)) 3600000)
+               (scheduler/new-scheduler #(swap! % assoc :events (events/last-3-events)) 3600000)
                [:app-state])
    :webserver (component/using
                (webserver/prod-server web-port)

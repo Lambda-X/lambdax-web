@@ -18,18 +18,18 @@
      :headers {"Content-Type" "application/transit+json"}
      :body (-> req handler util/write-transit)}))
 
-(defn feeds [{:keys [app-state]}]
-  (let [feeds (:feeds @app-state)]
-    (or (seq feeds) "No feeds available")))
+(defn events [{:keys [app-state]}]
+  (let [events (:events @app-state)]
+    (or (seq events) "No events available")))
 
 (def routes
   [""  {"/" :index
-        "/feeds"
-        {:get {[""] :feeds}}}])
+        "/events"
+        {:get {[""] :events}}}])
 
 (def match->handler
   {:index index
-   :feeds (wrap-transit-response feeds)})
+   :events (wrap-transit-response events)})
 
 (defn route-handler [{:keys [uri request-method] :as req}]
   (let [match (bidi/match-route routes uri :request-method request-method)]

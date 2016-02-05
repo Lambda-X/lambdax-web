@@ -10,9 +10,9 @@
 
 (enable-console-print!)
 
-(defn merge-feeds [reconciler new-feeds]
+(defn merge-events [reconciler new-events]
   (swap! (-> reconciler :config :state)
-         assoc-in [:section/by-name :news :content] new-feeds)
+         assoc-in [:section/by-name :news :content] new-events)
   (om-p/queue! reconciler [:sections]))
 
 (defn transit-get [url cb]
@@ -30,8 +30,8 @@
 
 (om/add-root! reconciler views/RootView (gdom/getElement "app"))
 
-(transit-get "/feeds" (partial merge-feeds reconciler))
+(transit-get "/events" (partial merge-events reconciler))
 
 (js/setInterval
- #(transit-get "/feeds" (partial merge-feeds reconciler))
+ #(transit-get "/events" (partial merge-events reconciler))
  5000)
