@@ -1,7 +1,23 @@
 (ns lambdax-web.views
   (:require [om.dom :as dom]
             [om.next :as om :refer-macros [defui]]
-            [clojure.string :refer [join split]]))
+            [clojure.string :refer [join split upper-case]]
+            [cljs-time.core :as t]
+            [cljs-time.coerce :as c]))
+
+(def ^:private number->month
+  {1 "JAN"
+   2 "FEB"
+   3 "MAR"
+   4 "APR"
+   5 "MAY"
+   6 "JUNE"
+   7 "JULY"
+   8 "AUG"
+   9 "SEPT"
+   10 "OCT"
+   11 "NOV"
+   12 "DEC"})
 
 (defn render-main-section []
   (dom/section #js {:id "main" :className "full-width"}
@@ -49,7 +65,7 @@
                                           (dom/div #js {:className "clearfix"})))
                         (dom/img #js {:src "img/greg-contact.svg" :alt "Greg"}))))
 
-(defui RenderAboutUs
+(defui AboutUs
   static om/IQuery
   (query [this]
          [:title :img :content])
@@ -70,8 +86,7 @@
                                                                      (str "btn "))))})
                                    (:text content)))))))
 
-(def render-about-us (om/factory RenderAboutUs))
-
+(def render-about-us (om/factory AboutUs))
 
 (defui Technologies
   static om/IQuery
@@ -120,36 +135,59 @@
 (defui News
   static om/IQuery
   (query [this]
-         [:title :text :month :day :type :author :img :link])
+         [:title :text :date :type :author :img :link])
   Object
   (render [this]
-          (let [{:keys [title text month day type author img link]} (om/props this)]
+          (let [{:keys [title text date type author img link]} (om/props this)
+                date (c/from-date date)]
             (dom/div #js {:className "news-box"}
                      (dom/img (clj->js {:src (:src img) :alt (:alt img) :className "inline-block"}))
                      (dom/div #js {:className "inline-block text"}
                               (dom/p #js {:className "top"}
                                      (dom/span #js {:className "type"}
-                                               type)
+                                               (join " " (-> type
+                                                             name
+                                                             upper-case
+                                                             (split #"-"))))
+                                     " by "
                                      (dom/span #js {:className "author"}
                                                author))
                               (dom/h3 nil title)
                               (dom/p nil text)
-                              (dom/a (clj->js {:href (:href link) :title (:title link)})
-                                     (:text link)))
+                              (dom/a (clj->js {:href link :title "more"})
+                                     "read-more"))
                      (dom/span #js {:className "calendar-card"}
-                               (dom/strong nil day)
-                               month)))))
+                               (dom/strong nil (t/day date))
+                               (->> date
+                                    t/month
+                                    (get number->month)))))))
 
 (def render-news (om/factory News))
 
-(defui RenderSection
+(def ^:private section->content
+  {:about-us render-about-us
+   :technologies render-technologies
+   :projects render-projects
+   :team render-team
+   :news render-news})
+
+(defui Section
+  static om/Ident
+  (ident [this {:keys [section-name]}]
+         [:section/by-name section-name])
   static om/IQuery
   (query [this]
-         [:name :title :parts :theme :content])
+         (zipmap [:about-us :technologies :projects :team :news]
+                 (map #(conj [:section-name :title :parts :theme] {:content %})
+                      [(om/get-query AboutUs)
+                       (om/get-query Technologies)
+                       (om/get-query Projects)
+                       (om/get-query Team)
+                       (om/get-query News)])))
   Object
   (render [this]
-          (let [{:keys [name title parts theme content]} (om/props this)]
-            (dom/section (clj->js {:id name :className (str theme " " name)})
+          (let [{:keys [section-name title parts theme content]} (om/props this)]
+            (dom/section (clj->js {:id (name section-name) :className (str theme " " (name section-name))})
                          (dom/div #js {:className "page-width"}
                                   (dom/h1 #js {:className "page-title"}
                                           title)
@@ -157,23 +195,21 @@
                                                      (if parts
                                                        "rp-container three-part"
                                                        "rp-container")})
-                                           (cond (= name "about-us") (map render-about-us content)
-                                                 (= name "technologies") (map render-technologies content)
-                                                 (= name "projects") (map render-projects content)
-                                                 (= name "team") (map render-team content)
-                                                 (= name "news") (map render-news content))))))))
+                                           (map (get section->content section-name) content)))))))
 
-(def render-section (om/factory RenderSection))
+(def render-section (om/factory Section))
 
 (defui RootView
   static om/IQuery
   (query [this]
-         [:sections])
+         [{:sections (om/get-query Section)}])
   Object
   (render [this]
           (let [{:keys [sections]} (om/props this)]
             (dom/div #js {:id "main-div"}
                      (render-main-section)
                      (render-slogan-section)
-                     (map render-section sections)
+                     (map #(render-section (assoc %1 :theme %2))
+                          sections
+                          (cycle '("light-theme" "dark-theme")))
                      (render-footer-section)))))

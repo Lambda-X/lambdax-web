@@ -13,7 +13,7 @@
                {:title "We are ready to help you"
                 :img {:src "img/icon-contact.svg"
                       :alt "Our culture"}
-                :content {:type :button 
+                :content {:type :button
                           :text "contact us"}}])
 
 (def technologies [{:name "ClojureScript"
@@ -24,8 +24,7 @@
                           :alt "Clojure"}}
                    {:name "ClojureScript"
                     :img {:src "img/cljs.svg"
-                          :alt "Clojure"}}
-                   ])
+                          :alt "Clojure"}}])
 
 (def projects [{:title "Replumb is a plumbing library for your self-hosted
               ClojureScript Read-Eval-Print-Loops."
@@ -55,80 +54,52 @@
             :text "Some random tekst goes here. Some random tekst
                    goes here. Some random tekst goes here. Some
                    random tekst goes here. Some random tekst goes here."
-            :month "JUN"
-            :day "30"
+            :date #inst "2016-02-03T15:08:47.000-00:00"
             :type "BLOG POST"
             :author "Andrea.Richiardi"
             :img {:src "img/news.png"
                   :alt "news"}
-            :link {:href "#"
-                   :title "more"
-                   :text "read more"}}
+            :link "#"}
            {:title "How awesome Clojure is!"
             :text "Some random tekst goes here. Some random tekst
                    goes here. Some random tekst goes here. Some
                    random tekst goes here. Some random tekst goes here."
-            :month "JUN"
-            :day "30"
+            :date #inst "2016-02-03T15:08:47.000-00:00"
             :type "BLOG POST"
             :author "Andrea.Richiardi"
             :img {:src "img/news.png"
                   :alt "news"}
-            :link {:href "#"
-                   :title "more"
-                   :text "read-more"}}
+            :link "#"}
            {:title "How awesome Clojure is!"
             :text "Some random tekst goes here. Some random tekst
                    goes here. Some random tekst goes here. Some
                    random tekst goes here. Some random tekst goes here."
-            :month "JUN"
-            :day "30"
+            :date #inst "2016-02-03T15:08:47.000-00:00"
             :type "BLOG POST"
             :author "Andrea.Richiardi"
             :img {:src "img/news.png"
                   :alt "news"}
-            :link {:href "#"
-                   :title "more"
-                   :text "read-more"}}])
+            :link "#"}])
 
-(def sections [{:name "about-us"
+(def sections [{:section-name :about-us
                 :title "About us"
                 :parts true
-                :theme "light-theme"
                 :content about-us}
-               {:name "technologies"
+               {:section-name :technologies
                 :title "We are best at"
                 :parts true
-                :theme "dark-theme"
                 :content technologies}
-               {:name "projects"
+               {:section-name :projects
                 :title "Our recent projects"
                 :parts false
-                :theme "light-theme"
                 :content projects}
-               {:name "team"
+               {:section-name :team
                 :title "Team"
                 :parts true
-                :theme "dark-theme"
                 :content team}
-               {:name "news"
+               {:section-name :news
                 :title "Latest news"
                 :parts false
-                :theme "light-theme"
-                :content news}])
+                :content []}])
 
-
-(def application-state {:twitter-status [{:created_at "date-time"
-                                          :text "some text"
-                                          :retweet_count "0"
-                                          :favourite-count "0"}
-                                         {:created_at "date-time"
-                                          :text "some text"
-                                          :retweet_count "0"
-                                          :favourite-count "0"}]
-                        :sections sections
-                        :about-us about-us
-                        :technologies technologies
-                        :projects projects
-                        :team team
-                        :news news})
+(def application-state {:sections sections})
