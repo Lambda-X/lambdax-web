@@ -6,7 +6,8 @@
             [ring.middleware.content-type :refer [wrap-content-type]]
             [ring.middleware.not-modified :refer [wrap-not-modified]]
             [lambdax-web.util :as util]
-            [com.stuartsierra.component :as component]))
+            [com.stuartsierra.component :as component]
+            [prone.middleware :as prone]))
 
 (defn index [_]
   (assoc (resource-response "index.html" {:root "public"})
@@ -51,6 +52,8 @@
   (fn [req]
     ((-> (prod-handler app-state)
          (wrap-resource "public")
+         (prone/wrap-exceptions
+          {:skip-prone? (fn [req] (contains? (:headers req) "postman-token"))})
          wrap-content-type
          wrap-not-modified)
      req)))
