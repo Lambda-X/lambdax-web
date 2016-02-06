@@ -1,26 +1,31 @@
 (ns lambdax-web.system
-  (:require [lambdax-web.server :as webserver]
+  (:require [lambdax-web.app :as app]
+            [lambdax-web.server :as webserver]
             [lambdax-web.scheduler :as scheduler]
             [lambdax-web.events :as events]
-            [com.stuartsierra.component :as component]))
+            [lambdax-web.config :as config]
+            [lambdax-web.repl :as repl]
+            [com.stuartsierra.component :as component]
+            [environ.core :refer [env]]
+            [clojure.edn :as edn]
+            [clojure.java.io :as io]))
 
-(defn dev-system [{:keys [web-port] :as config}]
-  (component/system-map
-   :app-state (atom {:events []})
-   :scheduler (component/using
-               (scheduler/new-scheduler #(swap! % assoc :events (events/last-3-events))
-                                        5000)
-               [:app-state])
-   :webserver (component/using
-               (webserver/dev-server web-port)
-               [:app-state])))
+(defn make-config
+  "Creates a default configuration map"
+  []
+  (-> config/defaults
+      (merge {:version (:lambdax-web-version env)})))
 
-(defn prod-system [{:keys [web-port] :as config}]
+(defn new-system
+  [config-map]
   (component/system-map
-   :app-state (atom {:events []})
+   :app (app/new-app (:name config-map)
+                     (:version config-map))
    :scheduler (component/using
-               (scheduler/new-scheduler #(swap! % assoc :events (events/last-3-events)) 3600000)
-               [:app-state])
+                (scheduler/new-scheduler scheduler/fetch-events!
+                                         (:fetch-interval config-map))
+                [:app])
    :webserver (component/using
-               (webserver/prod-server web-port)
-               [:app-state])))
+                (webserver/new-server (:port config-map)
+                                      (:build config-map))
+                [:app])))

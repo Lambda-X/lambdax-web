@@ -3,12 +3,22 @@
             [clojure.repl :refer :all]
             [clojure.tools.namespace.repl :refer [refresh refresh-all]]
             [com.stuartsierra.component :as component]
-            [lambdax-web.system :as app]))
+            [lambdax-web.system :as sys]))
 
 (def system nil)
 
+(defn ppsys
+  "Pretty prints the system var"
+  []
+  (if-not (nil? system)
+    (pprint system)
+    (println "System not initialized yet")))
+
 (defn init []
-  (alter-var-root #'system (constantly (app/dev-system {:web-port 3000}))))
+  (->> (sys/make-config)
+       (sys/new-system)
+       (constantly)
+       (alter-var-root #'system)))
 
 (defn start []
   (alter-var-root #'system component/start))

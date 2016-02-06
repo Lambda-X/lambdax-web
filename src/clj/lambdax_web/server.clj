@@ -57,21 +57,22 @@
 
 ;; Server
 
-(defrecord WebServer [port handler app-state shut-down]
+(defrecord WebServer [port build app shut-down]
   component/Lifecycle
   (start [component]
-    (if shut-down
-      component
-      (let [request-handler (handler app-state)
-            server (httpkit/run-server request-handler {:port port})]
-        (assoc component :shut-down server))))
+         (if shut-down
+           component
+           (do (println "Starting webserver on port" port)
+               (let [handler (case build
+                               :dev (dev-handler (:state app))
+                               :prod (prod-handler (:state app)))
+                     server (httpkit/run-server handler {:port port})]
+                 (assoc component :shut-down server)))))
   (stop [component]
-    (when-let [shutdown-fn (:shut-down component)]
-      (shutdown-fn))
-    (dissoc component :shut-down)))
+        (when-let [shutdown-fn (:shut-down component)]
+          (println "Shutting webserver")
+          (shutdown-fn))
+        (dissoc component :shut-down)))
 
-(defn dev-server [web-port]
-  (WebServer. 3000 dev-handler nil nil))
-
-(defn prod-server [web-port]
-  (WebServer. 3000 prod-handler nil nil))
+(defn new-server [port build]
+  (WebServer. port build nil nil))
