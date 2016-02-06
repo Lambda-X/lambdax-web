@@ -45,7 +45,9 @@
                                 [org.clojure/tools.namespace "0.2.11"]
                                 [org.clojure/tools.trace "0.7.9"]
                                 ;; [pjstadig/humane-test-output "0.7.1"]
-                                [mvxcvi/puget "1.0.0"]]
+                                [mvxcvi/puget "1.0.0"]
+                                [org.clojure/tools.nrepl "0.2.12"]
+                                [cider/cider-nrepl "0.11.0-SNAPSHOT"]]
                  :source-paths ["src/dev" "env/dev/clj"]
                  :resource-paths ^:replace ["dev-resources"]
                  :repl-options {:init-ns lambdax-web.dev}}

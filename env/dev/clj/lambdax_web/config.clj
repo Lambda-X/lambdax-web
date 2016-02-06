@@ -4,6 +4,7 @@
   {:name "LamdbaX Website Backend (DEV)"
    :fetch-interval 10000
    :build :dev
+   :nrepl-port 0 ;; auto select
    :port 3000
    :feeds #{{:name :lambdax-blog
              :type :rss
