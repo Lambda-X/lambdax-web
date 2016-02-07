@@ -20,7 +20,9 @@
                  [http-kit "2.1.18"]
                  [ring/ring-core "1.4.0" :exclusions [ring/ring-jetty-adapter]]
                  [bidi "1.21.1"]
-                 [environ "1.0.2"]]
+                 [environ "1.0.2"]
+                 [org.clojure/tools.nrepl "0.2.12"]
+                 [cider/cider-nrepl "0.11.0-SNAPSHOT"]]
 
   :plugins [[lein-cljsbuild "1.1.1"]
             [lein-figwheel "0.5.0-3"]
@@ -28,8 +30,8 @@
 
   :source-paths ["src/clj" "src/cljs" "test/clj" "test/cljs"]
   :min-lein-version "2.0.0"
-  :uberjar-name "lambdax-web.jar"
-  :jvm-opts ["-server"]
+  :uberjar-name "lambdax-web-standalone.jar"
+  :jvm-opts ^:replace ["-XX:+TieredCompilation" "-XX:TieredStopAtLevel=1" "-Xverify:none"]
   :resource-paths ["resources"]
 
   :main ^:skip-aot lambdax-web.core
@@ -45,9 +47,7 @@
                                 [org.clojure/tools.namespace "0.2.11"]
                                 [org.clojure/tools.trace "0.7.9"]
                                 ;; [pjstadig/humane-test-output "0.7.1"]
-                                [mvxcvi/puget "1.0.0"]
-                                [org.clojure/tools.nrepl "0.2.12"]
-                                [cider/cider-nrepl "0.11.0-SNAPSHOT"]]
+                                [mvxcvi/puget "1.0.0"]]
                  :source-paths ["src/dev" "env/dev/clj"]
                  :resource-paths ^:replace ["dev-resources"]
                  :repl-options {:init-ns lambdax-web.dev}}
@@ -108,4 +108,4 @@
              ;; to configure a different figwheel logfile path
              ;; :server-logfile "tmp/logs/figwheel-logfile.log"
              }
-  :aliases {"bg-repl" ["trampoline" "repl" ":headless" "> repl.out 2> repl.err < /dev/null &"]})
+  :aliases {"bg-repl" ["trampoline" "repl" ":headless" ">" "repl.out " "2>" "repl.err" "<" "/dev/null" "&"]})

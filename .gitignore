@@ -13,3 +13,5 @@ pom.xml
 .nrepl-port
 .lein-env
 .dir-locals.el
+repl.err
+repl.out
