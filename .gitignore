@@ -15,3 +15,4 @@ pom.xml
 .dir-locals.el
 repl.err
 repl.out
+nohup.out

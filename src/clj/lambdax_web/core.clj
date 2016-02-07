@@ -6,18 +6,23 @@
 (def system nil)
 
 (defn init []
-  (->> (sys/make-config)
-       (sys/new-system)
-       (constantly)
-       (alter-var-root #'system)))
+  (let [config (sys/make-config)]
+    (println "[Initializing]" (:name config) (when (:version config)
+                                               (str "- " (:version config))))
+    (->> config
+         (sys/new-system)
+         (constantly)
+         (alter-var-root #'system))))
 
 (defn start []
-  (alter-var-root #'system component/start))
+  (do (println "Starting system...")
+      (alter-var-root #'system component/start)))
 
 (defn stop []
-  (alter-var-root #'system #(some-> % component/stop)))
+  (do (println "Stopping system...")
+      (alter-var-root #'system #(some-> % component/stop))))
 
 (defn -main [& args]
-  (.addShutdownHook (Runtime/getRuntime) (Thread. (comp shutdown-agents stop)))
+  (.addShutdownHook (Runtime/getRuntime) (Thread. #(do (stop) (shutdown-agents))))
   (init)
   (start))

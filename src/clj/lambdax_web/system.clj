@@ -14,7 +14,10 @@
   "Creates a default configuration map"
   []
   (-> config/defaults
-      (merge {:version (:lambdax-web-version env)})))
+      (merge (into {} [(some->> (:lambdax-web-version env) (hash-map :version))
+                       (some->> (:lambdax-web-port env) (Integer/parseInt) (hash-map :port))
+                       (some->> (:lambdax-web-nrepl-port env) (Integer/parseInt) (hash-map :nrepl-port))
+                       (some->> (:lambdax-web-fetch-every env) (Integer/parseInt) (hash-map :fetch-interval))]))))
 
 (defn new-system
   [config-map]
