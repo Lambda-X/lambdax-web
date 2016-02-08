@@ -1,25 +1,19 @@
 (ns lambdax-web.dev
   (:require [clojure.pprint :refer [pprint]]
-            [clojure.repl :refer :all]
-            [clojure.tools.namespace.repl :refer [refresh refresh-all]]
-            [com.stuartsierra.component :as component]
-            [lambdax-web.system :as app]))
+            [clojure.tools.namespace.repl :refer [refresh]]
+            [lambdax-web.core :as core]))
 
-(def system nil)
-
-(defn init []
-  (alter-var-root #'system (constantly (app/dev-system {:web-port 3000}))))
-
-(defn start []
-  (alter-var-root #'system component/start))
-
-(defn stop []
-  (alter-var-root #'system #(some-> % component/stop)))
+(defn ppsys
+  "Pretty prints the system var"
+  []
+  (if-not (nil? core/system)
+    (pprint core/system)
+    (println "System not initialized yet")))
 
 (defn go []
-  (init)
-  (start))
+  (core/init)
+  (core/start))
 
 (defn reset []
-  (stop)
+  (core/stop)
   (refresh :after 'lambdax-web.dev/go))

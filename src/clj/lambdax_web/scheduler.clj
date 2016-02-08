@@ -1,21 +1,29 @@
 (ns lambdax-web.scheduler
   (:require [overtone.at-at :as scheduler]
-            [com.stuartsierra.component :as component]))
+            [com.stuartsierra.component :as component]
+            [lambdax-web.events :as events]))
 
 ;; Scheduler
 
-(defrecord Scheduler [scheduled-fn schedule-interval pool app-state]
+(def fetch-events!
+  "A function that fetches events and assoc them to the app-atom,
+  typically the global state, under the :events key. It is side
+  effectful."
+  (fn [app-atom]
+    (swap! app-atom assoc :events (events/last-3-events))))
+
+(defrecord Scheduler [scheduled-fn interval pool app]
   component/Lifecycle
   (start [component]
-    (if pool
-      component
-      (let [pool (scheduler/mk-pool)]
-        (scheduler/every schedule-interval (partial scheduled-fn app-state) pool)
-        (assoc component :pool pool))))
+         (if pool
+           component
+           (let [pool (scheduler/mk-pool)]
+             (scheduler/every interval (partial scheduled-fn (:state app)) pool)
+             (assoc component :pool pool))))
   (stop [component]
-    (when-let [pool (:pool component)]
-      (scheduler/stop-and-reset-pool! pool :strategy :kill))
-    (dissoc component :pool)))
+        (when-let [pool (:pool component)]
+          (scheduler/stop-and-reset-pool! pool :strategy :kill))
+        (dissoc component :pool)))
 
-(defn new-scheduler [scheduled-fn schedule-interval]
-  (Scheduler. scheduled-fn schedule-interval nil nil))
+(defn new-scheduler [scheduled-fn interval]
+  (Scheduler. scheduled-fn interval nil nil))
