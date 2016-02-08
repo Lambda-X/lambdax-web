@@ -13,4 +13,11 @@
   [{:keys [state]} k _]
   {:value (get @state k)})
 
-(def parser (om/parser {:read read}))
+(defmulti mutate (fn [_ k _] k))
+
+(defmethod mutate 'message/send-message!
+  [{:keys [state]} _ {:keys [name email message]}]
+  {:action (fn [] (swap! state update-in [:message-sent?] not))
+   :form true})
+
+(def parser (om/parser {:read read :mutate mutate}))
