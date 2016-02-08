@@ -40,31 +40,6 @@
                                  (dom/p nil "We are the first Clojure centring software house.")
                                  (dom/p nil "Functional experts dedicated to clojure and cojure script.")))))
 
-(defn render-footer-section []
-  (dom/section #js {:id "contact" :className "dark-theme contact"}
-               (dom/div #js {:className "page-width"}
-                        (dom/h1 #js {:className "page-title"}
-                                "Contact us")
-                        (dom/div #js {:className "rp-container three-part"}
-                                 (dom/div #js {:className "inline-block"})
-                                 (dom/div #js {:className "inline-block"}
-                                          (dom/h2 nil "We are waiting for your message!")
-                                          (dom/p nil "You can also catch us up via our social accounts! Observe us to stay in touch.")
-                                          (dom/div #js {:className "socials"}
-                                                   (dom/a #js {:href "http://facebook.com" :title "Facebook" :rel "nofollow"}
-                                                          (dom/i #js {:className "fa fa-facebook"}))
-                                                   (dom/a #js {:href "http://github.com" :title "Github" :rel "nofollow"}
-                                                          (dom/i #js {:className "fa fa-github-alt"}))
-                                                   (dom/a #js {:href "http://twitter.com":title "Twitter" :rel "nofollow"}
-                                                          (dom/i #js {:className "fa fa-twitter"}))))
-                                 (dom/div #js {:className "inline-block"}
-                                          (dom/input #js {:type "text" :name "name" :placeholder "your name"})
-                                          (dom/input #js {:type "email" :name "email" :placeholder "your email"})
-                                          (dom/textarea #js {:type "text" :name "content" :defaultValue "What's up?"})
-                                          (dom/input #js {:type "submit" :value "send message" :className "btn"})
-                                          (dom/div #js {:className "clearfix"})))
-                        (dom/img #js {:src "img/greg-contact.svg" :alt "Greg"}))))
-
 (defui AboutUs
   static om/IQuery
   (query [this]
@@ -199,17 +174,83 @@
 
 (def render-section (om/factory Section))
 
+(defn render-footer-section [contact-form]
+  (dom/section #js {:id "contact" :className "dark-theme contact"}
+               (dom/div #js {:className "page-width"}
+                        (dom/h1 #js {:className "page-title"}
+                                "Contact us")
+                        (dom/div #js {:className "rp-container three-part"}
+                                 (dom/div #js {:className "inline-block"})
+                                 (dom/div #js {:className "inline-block"}
+                                          (dom/h2 nil "We are waiting for your message!")
+                                          (dom/p nil "You can also catch us up via our social accounts! Observe us to stay in touch.")
+                                          (dom/div #js {:className "socials"}
+                                                   (dom/a #js {:href "http://facebook.com" :title "Facebook" :rel "nofollow"}
+                                                          (dom/i #js {:className "fa fa-facebook"}))
+                                                   (dom/a #js {:href "http://github.com" :title "Github" :rel "nofollow"}
+                                                          (dom/i #js {:className "fa fa-github-alt"}))
+                                                   (dom/a #js {:href "http://twitter.com":title "Twitter" :rel "nofollow"}
+                                                          (dom/i #js {:className "fa fa-twitter"}))))
+                                 (dom/div #js {:className "inline-block"}
+                                          contact-form)
+                                 (dom/img #js {:src "img/greg-contact.svg" :alt "Greg"})))))
+
+(defui ContactForm
+  Object
+  (initLocalState [this]
+                  {:name "" :email "" :message ""})
+  (render [this]
+          (dom/form #js {:onSubmit (fn [event]
+                                     (.preventDefault event)
+                                     ((:submit-message (om/props this))
+                                      {:name (:name (om/get-state this))
+                                       :email (:email (om/get-state this))
+                                       :message (:message (om/get-state this))})
+                                     (om/update-state! this assoc :name "" :email "" :message ""))}
+                    (dom/input #js {:type "text"
+                                    :name "name"
+                                    :placeholder "your name"
+                                    :value (:name (om/get-state this))
+                                    :onChange (fn [event]
+                                                (om/update-state! this assoc :name (.. event -target -value)))})
+                    (dom/input #js {:type "email"
+                                    :name "email"
+                                    :placeholder "your email"
+                                    :pattern "[^ @]*@[^ @]*"
+                                    :required "required"
+                                    :value (:email (om/get-state this))
+                                    :onChange (fn [event]
+                                                (om/update-state! this assoc :email (.. event -target -value)))})
+                    (dom/textarea #js {:type "text"
+                                       :name "content"
+                                       :placeholder "Leave your message"
+                                       :defaultValue "What's up?"
+                                       :value (:message (om/get-state this))
+                                       :onChange (fn [event]
+                                                   (om/update-state! this assoc :message (.. event -target -value)))})
+                    (dom/input #js {:type "submit"
+                                    :value "send message"
+                                    :className "btn"})
+                    (dom/div #js {:className "clearfix"}))))
+
+(def render-contact-form (om/factory ContactForm))
+
+
 (defui RootView
   static om/IQuery
   (query [this]
-         [{:sections (om/get-query Section)}])
+         [{:sections (om/get-query Section)} :message-sent?])
   Object
   (render [this]
-          (let [{:keys [sections]} (om/props this)]
+          (let [{:keys [sections message-sent?]} (om/props this)]
             (dom/div #js {:id "main-div"}
                      (render-main-section)
                      (render-slogan-section)
                      (map #(render-section (assoc %1 :theme %2))
                           sections
                           (cycle '("light-theme" "dark-theme")))
-                     (render-footer-section)))))
+                     (if message-sent?
+                       (render-footer-section "Thank you for getting in touch!")
+                       (render-footer-section (render-contact-form
+                                               {:submit-message (fn [new-message]
+                                                                  (om/transact! this `[(message/send-message! ~new-message)]))})))))))

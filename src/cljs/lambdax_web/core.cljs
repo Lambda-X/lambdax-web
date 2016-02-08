@@ -1,5 +1,6 @@
 (ns lambdax-web.core
-  (:require [om.next :as om]
+  (:require [clojure.string :as s]
+            [om.next :as om]
             [om.next.protocols :as om-p]
             [cognitect.transit :as t]
             [goog.dom :as gdom]
@@ -9,6 +10,8 @@
   (:import [goog.net XhrIo]))
 
 (enable-console-print!)
+
+(def contact-form-email "sales@scalac.io")
 
 (defn merge-events [reconciler new-events]
   (swap! (-> reconciler :config :state)
@@ -23,15 +26,35 @@
                       (cb (t/read (t/reader :json) response-string)))))
          "GET"))
 
+(defn map->form-str [data]
+  (->> data
+       (map (fn [[k v]]
+              (str (name k) "=" v)))
+       (s/join "&")))
+
+(defn formspree-send [mail data]
+  (.send XhrIo (str "//formspree.io/" mail)
+         (fn [e])
+         "POST" (map->form-str data)
+         #js {"Accept" "application/json"}))
+
+(defn send [{:keys [form]} cb]
+  (let [params (-> form om/query->ast :children first :params)]
+    (formspree-send contact-form-email params))
+  ;;(cb {:message-sent? :success})
+  )
+
 (def reconciler
   (om/reconciler
    {:state data/application-state
-    :parser p/parser}))
+    :parser p/parser
+    :remotes [:form]
+    :send send}))
 
 (om/add-root! reconciler views/RootView (gdom/getElement "app"))
+(comment
+  (transit-get "/events" (partial merge-events reconciler))
 
-(transit-get "/events" (partial merge-events reconciler))
-
-(js/setInterval
- #(transit-get "/events" (partial merge-events reconciler))
- 5000)
+  (js/setInterval
+   #(transit-get "/events" (partial merge-events reconciler))
+   5000))

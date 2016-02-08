@@ -102,4 +102,5 @@
                 :parts false
                 :content []}])
 
-(def application-state {:sections sections})
+(def application-state {:sections sections
+                        :message-sent? false})
