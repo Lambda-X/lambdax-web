@@ -30,7 +30,7 @@ This will create `target/lambdax-web-standalone.jar` that can be launched in a s
 # export LAMBDAX_WEB_NREPL_PORT=45555       # default is 0, aka auto selection
 # export LAMBDAX_WEB_FETCH_EVERY=           # default 360000 (in seconds)
 
-export LAMBDAX_WEB_VERSION=0.1.0-SNAPSHOT # not shown unless specified with this variable
+export LAMBDAX_WEB_VERSION=0.1.0-SNAPSHOT   # not shown unless specified with this variable
 java -jar target/lambdax-web-standalone.jar
 ```
 
@@ -59,7 +59,7 @@ get live reloading, nor a REPL.
 
 To get an interactive development environment run:
 
-`lein figwheel`
+`lein figwheel website` or `lein fig-dev*` (the asterisk includes `clean`)
 
 and open your browser at [localhost:3449](http://localhost:3449/).
 This will auto compile and send all changes to the browser without the
