@@ -501,7 +501,7 @@ input[type="submit"].btn {
     .inline-block.slogan {text-align: center; width: 100% }
 
     .technologies {
-        background-size: cover;
+        background-size: 100%;
         background-position: right bottom;
     }
 
