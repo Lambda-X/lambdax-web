@@ -27,12 +27,13 @@
               ClojureScript Read-Eval-Print-Loops."
                 :tags "clojure, lib, functional programing"
                 :img {:src "img/replumb.svg"
-                      :alt "replumb"}}
-               {:title "Live demo of replumb
-              created with clojure script."
+                      :alt "replumb"}
+                :url "https://github.com/Lambda-X/replumb"}
+               {:title "Clojurescript.io - A live Repl, featuring replumb."
                 :tags "clojurescript, website, live demo"
-                :img {:src "img/replumb.svg"
-                      :alt "Replumb"}}])
+                :img {:src "img/clojurescript_io.png"
+                      :alt "clojurescript.io"}
+                :url "https://github.com/Lambda-X/cljs-repl-web"}])
 
 (def team [{:name "Andrea"
             :title "Hello there!"
