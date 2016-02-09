@@ -48,37 +48,6 @@
             :img {:src "img/boy.svg"
                   :alt "Tomek"}}])
 
-(def news [{:title "How awesome Clojure is!"
-            :text "Some random tekst goes here. Some random tekst
-                   goes here. Some random tekst goes here. Some
-                   random tekst goes here. Some random tekst goes here."
-            :date #inst "2016-02-03T15:08:47.000-00:00"
-            :type "BLOG POST"
-            :author "Andrea.Richiardi"
-            :img {:src "img/news.png"
-                  :alt "news"}
-            :link "#"}
-           {:title "How awesome Clojure is!"
-            :text "Some random tekst goes here. Some random tekst
-                   goes here. Some random tekst goes here. Some
-                   random tekst goes here. Some random tekst goes here."
-            :date #inst "2016-02-03T15:08:47.000-00:00"
-            :type "BLOG POST"
-            :author "Andrea.Richiardi"
-            :img {:src "img/news.png"
-                  :alt "news"}
-            :link "#"}
-           {:title "How awesome Clojure is!"
-            :text "Some random tekst goes here. Some random tekst
-                   goes here. Some random tekst goes here. Some
-                   random tekst goes here. Some random tekst goes here."
-            :date #inst "2016-02-03T15:08:47.000-00:00"
-            :type "BLOG POST"
-            :author "Andrea.Richiardi"
-            :img {:src "img/news.png"
-                  :alt "news"}
-            :link "#"}])
-
 (def sections [{:section-name :about-us
                 :title "About us"
                 :parts true
