@@ -63,7 +63,7 @@
   [rss-url]
   (parse-feed rss-url))
 
-(def rss-keys-to-select [:authors :link :title :published-date :contents])
+(def rss-keys-to-select [:authors :link :title :published-date :contents :description])
 
 (defn last-statuses [number-of-statuses rss-url]
   (->> rss-url
@@ -71,11 +71,17 @@
        :entries
        (take number-of-statuses)
        (map
-        #(let [{:keys [authors title link contents published-date]}
+        #(let [{:keys [authors title link contents published-date description]}
                (select-keys % rss-keys-to-select)]
-           (->Event (:name (first authors))
+           (->Event "The LambdaX Team"
+                    ;;(:name (first authors))
                     title
-                    (:value (first contents))
+                    (-> description
+                        :value
+                        (string/split #"<p>")
+                        second
+                        (string/replace #"</p>" "")) 
+                    ;;(:value (first contents))
                     published-date
                     :blog-post
                     link
