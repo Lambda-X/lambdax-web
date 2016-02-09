@@ -126,10 +126,27 @@ h3 {
     display: block;
 }
 
+#main {
+    max-height: 400px;
+    overflow: hidden;
+}
+
+#greg-svg {
+    position: relative;
+    top: 0;
+    float: right;
+    -webkit-transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+    -ms-transition: all 300ms ease-in-out;
+    -o-transition: all 300ms ease-in-out;
+    transition: all 300ms ease-in-out;
+}
+
 /****************** slogan **********************/
 
 section.slogan {
     padding-bottom: 20px;
+    text-align: center
 }
 
 
@@ -151,7 +168,6 @@ section.slogan {
 }
 
 .inline-block.slogan {
-    width: 70%;
     text-align: left;
 }
 
@@ -179,15 +195,22 @@ section.slogan {
 /***************** technologies *****************/
 
 .technologies {
-    background: url('../img/tech-bg.png') no-repeat center center;
+    background: #3f4a52 url('../img/greg-working.svg') no-repeat right bottom;
     background-attachment: fixed;
-    background-size: cover;
+    background-size: 80%;
 }
 
 .technologies h2 {
     text-transform: uppercase;
 }
 
+
+.books {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 200px
+}
 
 /**************** projects ********************/
 
@@ -476,6 +499,11 @@ input[type="submit"].btn {
 @media screen and (max-width: 768px) {
     .inline-block.logo {margin: 20px auto; display: block;}
     .inline-block.slogan {text-align: center; width: 100% }
+
+    .technologies {
+        background-size: cover;
+        background-position: right bottom;
+    }
 
     .three-part .inline-block, .projects .inline-block {
         width: 100%;
