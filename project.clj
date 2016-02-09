@@ -68,17 +68,9 @@
                            :asset-path "js/compiled/out"
                            :output-to "resources/public/js/compiled/lambdax_web.js"
                            :output-dir "resources/public/js/compiled/out"
-                           :source-map-timestamp true}}
-               ;; This next build is an compressed minified build for
-               ;; production. You can build this with:
-               ;; lein cljsbuild once min
-               {:id "min"
-                :source-paths ["src/cljs"]
-                :compiler {:output-to "resources/public/js/compiled/lambdax_web.js"
-                           :main lambdax-web.core
-                           :optimizations :advanced
-                           :pretty-print false}}]}
-
+                           :source-map-timestamp true
+                           :optimization :advanced}}]}
+  
   :figwheel {;; :http-server-root "public" ;; default and assumes "resources"
              ;; :server-port 3449 ;; default
              ;; :server-ip "127.0.0.1"
