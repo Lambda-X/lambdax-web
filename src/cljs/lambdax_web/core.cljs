@@ -6,7 +6,8 @@
             [goog.dom :as gdom]
             [lambdax-web.data :as data]
             [lambdax-web.parser :as p]
-            [lambdax-web.views :as views])
+            [lambdax-web.views :as views]
+            [lambdax-web.config :as config])
   (:import [goog.net XhrIo]))
 
 (enable-console-print!)
@@ -22,8 +23,10 @@
   (.send XhrIo url
          (fn [e]
            (this-as this
-                    (when-let [response-string (.getResponseText this)]
-                      (cb (t/read (t/reader :json) response-string)))))
+                    (let [response-string (.getResponseText this)]
+                      (if (s/blank? response-string)
+                        (.log js/console "Empty result")
+                        (cb (t/read (t/reader :json) response-string))))))
          "GET"))
 
 (defn map->form-str [data]
@@ -52,9 +55,9 @@
     :send send}))
 
 (om/add-root! reconciler views/RootView (gdom/getElement "app"))
-(comment
-  (transit-get "/events" (partial merge-events reconciler))
 
-  (js/setInterval
-   #(transit-get "/events" (partial merge-events reconciler))
-   5000))
+(transit-get (:events-uri config/defaults) (partial merge-events reconciler))
+
+(js/setInterval
+ #(transit-get (:events-uri config/defaults) (partial merge-events reconciler))
+ 5000)

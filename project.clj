@@ -53,27 +53,31 @@
 
   :clean-targets ^{:protect false} ["resources/public/js/compiled" "target"]
 
-  :cljsbuild
-  {:builds
-   [{:id "website"
-     :source-paths ["src/cljs"]
-
-     :figwheel {:on-jsload "lambdax-web.core/on-js-reload"}
-
-     :compiler {:main lambdax-web.core
-                :asset-path "js/compiled/out"
-                :output-to "resources/public/js/compiled/lambdax_web.js"
-                :output-dir "resources/public/js/compiled/out"
-                :source-map-timestamp true}}
-    ;; This next build is an compressed minified build for
-    ;; production. You can build this with:
-    ;; lein cljsbuild once min
-    {:id "min"
-     :source-paths ["src/cljs"]
-     :compiler {:output-to "resources/public/js/compiled/lambdax_web.js"
-                :main lambdax-web.core
-                :optimizations :advanced
-                :pretty-print false}}]}
+  :cljsbuild {:builds
+              [{:id "dev"
+                :source-paths ["src/cljs" "env/dev/cljs"]
+                :figwheel {:on-jsload "lambdax-web.core/on-js-reload"}
+                :compiler {:main lambdax-web.core
+                           :asset-path "js/compiled/out"
+                           :output-to "resources/public/js/compiled/lambdax_web.js"
+                           :output-dir "resources/public/js/compiled/out"
+                           :source-map-timestamp true}}
+               {:id "prod"
+                :source-paths ["src/cljs" "env/prod/cljs"]
+                :compiler {:main lambdax-web.core
+                           :asset-path "js/compiled/out"
+                           :output-to "resources/public/js/compiled/lambdax_web.js"
+                           :output-dir "resources/public/js/compiled/out"
+                           :source-map-timestamp true}}
+               ;; This next build is an compressed minified build for
+               ;; production. You can build this with:
+               ;; lein cljsbuild once min
+               {:id "min"
+                :source-paths ["src/cljs"]
+                :compiler {:output-to "resources/public/js/compiled/lambdax_web.js"
+                           :main lambdax-web.core
+                           :optimizations :advanced
+                           :pretty-print false}}]}
 
   :figwheel {;; :http-server-root "public" ;; default and assumes "resources"
              ;; :server-port 3449 ;; default
