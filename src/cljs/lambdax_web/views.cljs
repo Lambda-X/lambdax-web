@@ -36,7 +36,7 @@
                                (dom/img #js {:src "img/lambdax-short.svg"
                                              :alt "Lambdax"}))
                         (dom/div #js {:className "inline-block slogan"}
-                                 (dom/h1 nil "We do functional programming")
+                                 (dom/h1 nil "Putting (defn) back into programming")
                                  (dom/p nil "We are the first Clojure centring software house.")
                                  (dom/p nil "Functional experts dedicated to clojure and cojure script.")))))
 
@@ -182,8 +182,8 @@
                         (dom/div #js {:className "rp-container three-part"}
                                  (dom/div #js {:className "inline-block"})
                                  (dom/div #js {:className "inline-block"}
-                                          (dom/h2 nil "We are waiting for your message!")
-                                          (dom/p nil "You can also catch us up via our social accounts! Observe us to stay in touch.")
+                                          (dom/h2 nil "Connect with us at")
+                                          ;;(dom/p nil "You can also catch us up via our social accounts! Observe us to stay in touch.")
                                           (dom/div #js {:className "socials"}
                                                    (dom/a #js {:href "http://facebook.com" :title "Facebook" :rel "nofollow"}
                                                           (dom/i #js {:className "fa fa-facebook"}))

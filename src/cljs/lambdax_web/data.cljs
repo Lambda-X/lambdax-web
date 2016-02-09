@@ -4,12 +4,12 @@
                 :img {:src "img/icon-we.svg"
                       :alt "Our culture"}
                 :content {:type :text
-                          :text "Our community is based on experienced peoplewith a lot of knowledge. We strongly believe, that teamwork and some other stuff will help us come to better solutions and create more effective products."}}
+                          :text "Passion for functional programming and partnership with clients are the main foundation of our service. We deliver lean, stable code and we focus on the customer experience."}}
                {:title "We do functional programming"
                 :img {:src "img/icon-fp.svg"
                       :alt "Our culture"}
                 :content {:type :text
-                          :text "Our communitoy is based on experienced people with a lot of knowledage. We strongly believe, that teamwork and some other stuff will help us come to better solutions and create more effective products."}}
+                          :text "Clojure meets its goals by embracing an industry-standard, modernizing a venerable language - Lisp, fostering functional programming and providing built-in concurrency support. The result is robust, practical, and fast."}}
                {:title "We are ready to help you"
                 :img {:src "img/icon-contact.svg"
                       :alt "Our culture"}
@@ -21,10 +21,7 @@
                           :alt "Clojure"}}
                    {:name "Clojure"
                     :img {:src "img/clojure.svg"
-                          :alt "Clojure"}}
-                   {:name "ClojureScript"
-                    :img {:src "img/cljs.svg"
-                          :alt "Clojure"}}])
+                          :alt "Clojurescript"}}])
 
 (def projects [{:title "Replumb is a plumbing library for your self-hosted
               ClojureScript Read-Eval-Print-Loops."
