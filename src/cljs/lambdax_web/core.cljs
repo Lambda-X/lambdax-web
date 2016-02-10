@@ -12,8 +12,6 @@
 
 (enable-console-print!)
 
-(def contact-form-email "sales@scalac.io")
-
 (defn merge-events [reconciler new-events]
   (swap! (-> reconciler :config :state)
          assoc-in [:section/by-name :news :content] new-events)
@@ -43,9 +41,7 @@
 
 (defn send [{:keys [form]} cb]
   (let [params (-> form om/query->ast :children first :params)]
-    (formspree-send contact-form-email params))
-  ;;(cb {:message-sent? :success})
-  )
+    (formspree-send (get-in config/defaults [:contact-form :email]) params)))
 
 (def reconciler
   (om/reconciler
@@ -56,8 +52,8 @@
 
 (om/add-root! reconciler views/RootView (gdom/getElement "app"))
 
-(transit-get (:events-uri config/defaults) (partial merge-events reconciler))
+;; AR - TODO let's improve this please
+(transit-get (get-in config/defaults [:events :url]) (partial merge-events reconciler))
 
-(js/setInterval
- #(transit-get (:events-uri config/defaults) (partial merge-events reconciler))
- 5000)
+(js/setInterval #(transit-get (get-in config/defaults [:events :url]) (partial merge-events reconciler))
+                (get-in config/defaults [:events :interval]))
