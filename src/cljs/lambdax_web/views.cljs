@@ -190,7 +190,7 @@
                                           (dom/div #js {:className "socials"}
                                                    (dom/a #js {:href "http://facebook.com" :title "Facebook" :rel "nofollow"}
                                                           (dom/i #js {:className "fa fa-facebook"}))
-                                                   (dom/a #js {:href "http://github.com" :title "Github" :rel "nofollow"}
+                                                   (dom/a #js {:href "https://github.com/Lambda-X" :title "Github" :rel "nofollow"}
                                                           (dom/i #js {:className "fa fa-github-alt"}))
                                                    (dom/a #js {:href "http://twitter.com":title "Twitter" :rel "nofollow"}
                                                           (dom/i #js {:className "fa fa-twitter"}))))
