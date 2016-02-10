@@ -9,7 +9,7 @@
                 :img {:src "img/icon-fp.svg"
                       :alt "Our culture"}
                 :content {:type :text
-                          :text "Clojure meets its goals by embracing an industry-standard, modernizing a venerable language - Lisp, fostering functional programming and providing built-in concurrency support. The result is robust, practical, and fast."}}
+                          :text "Clojure embraces functional programming, provides excellent built-in concurrency support and targets several platforms, most notably the JVM and JavaScript (Node.js included). The result is robust, practical, and fast. You business drives."}}
                {:title "We are ready to help you"
                 :img {:src "img/icon-contact.svg"
                       :alt "Our culture"}
