@@ -11,7 +11,6 @@
                  [twitter-api "0.7.8"]
                  [com.stuartsierra/component "0.3.1"]
                  [overtone/at-at "1.2.0"]
-                 [org.clojars.scsibug/feedparser-clj "0.4.0"]
                  [clj-time "0.11.0"]
                  [com.cognitect/transit-clj "0.8.285"]
                  [com.cognitect/transit-cljs "0.8.237"]
