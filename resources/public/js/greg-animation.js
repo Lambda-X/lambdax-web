@@ -2,7 +2,7 @@ var top, svgObj, hiddentext,comein,ltext;
 window.onload = function() {
     svgObj = document.getElementById("greg-svg");
 
-    svgObj.style.width = "140%";
+    svgObj.style.width = "100%";
 
 
     var s = Snap(Snap("#greg-svg").node);
@@ -10,12 +10,12 @@ window.onload = function() {
 
     hiddentext = s.select("#hidden-text")
         .attr({
-            opacity: 0
+            opacity: 1
         });
 
     comein = s.select("#comein")
         .attr({
-            opacity: 0
+            opacity: 1
         });
 
 
@@ -23,11 +23,11 @@ window.onload = function() {
 }
 window.addEventListener("scroll",function(e) {
     top = window.pageYOffset;
-    if(top.pageYOffset > 0) {
+    if(top.pageYOffset == 0) {
         svgObj.style.width = "100%";
         comein.attr({opacity:1});
 
-    } else if(top.pageYOffset == 0) {
+    } else if(top.pageYOffset > 0) {
         svgObj.style.width = "140%";
         comein.attr({opacity:0});
 

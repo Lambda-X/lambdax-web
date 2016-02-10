@@ -40,7 +40,7 @@
                         (dom/div #js {:className "inline-block slogan"}
                                  (dom/h1 nil "Putting (defn) back into programming")
                                  (dom/p nil "We are the first Clojure centring software house.")
-                                 (dom/p nil "Functional experts dedicated to clojure and cojure script.")))))
+                                 (dom/p nil "Functional experts dedicated to clojure and clojure script.")))))
 
 (defui AboutUs
   static om/IQuery
@@ -100,12 +100,12 @@
          [:name :title :img])
   Object
   (render [this]
-          (let [{:keys [name title img]} (om/props this)]
+          (let [{:keys [name title img imgreal]} (om/props this)]
             (dom/div #js {:className "inline-block"}
                      (dom/div #js {:className "image"}
                               (dom/img (clj->js {:src (:src img) :alt (:alt img)}))
                               (dom/div #js {:className "egg animated"}
-                                       (dom/p nil title)))
+                                       (dom/img (clj->js {:src (:src imgreal) :alt (:alt imgreal)}))))
                      (dom/h3 nil name)))))
 
 (def render-team (om/factory Team))
