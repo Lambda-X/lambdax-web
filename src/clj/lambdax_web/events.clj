@@ -4,7 +4,6 @@
             [clj-time.core :as t]
             [clj-time.coerce :as c]
             [clojure.string :as string]
-            [feedparser-clj.core :refer :all]
             [lambdax-web.config :as config]
             [clj-rome.reader :refer :all])
   (:import [java.text SimpleDateFormat]))
