@@ -25,15 +25,15 @@
 
 (def projects [{:title "Replumb is a plumbing library for your self-hosted
               ClojureScript Read-Eval-Print-Loops."
-                :tags "clojure, lib, functional programing"
+                :tags "clojure, repl, functional programing"
                 :img {:src "img/replumb.svg"
                       :alt "replumb"}
                 :url "https://github.com/Lambda-X/replumb"}
                {:title "Clojurescript.io - A live Repl, featuring replumb."
-                :tags "clojurescript, website, live demo"
+                :tags "clojurescript, website, react"
                 :img {:src "img/clojurescript_io.png"
                       :alt "clojurescript.io"}
-                :url "www.clojurescript.io"}])
+                :url "http://www.clojurescript.io"}])
 
 (def team [{:name "Andrea"
             :title "Hello there!"
