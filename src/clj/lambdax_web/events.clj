@@ -60,6 +60,7 @@
 (def rss-keys-to-select [:authors :link :title :published-date :contents :description])
 
 (defn last-statuses [number-of-statuses rss-url]
+  (println "Fetching and parsing" rss-url)
   (->> rss-url
        rss-feeds
        :entries
@@ -97,11 +98,9 @@
       (> 0)))
 
 (defn last-3-events []
-  (println "Fetching last 3 events...")
   (let [lambdax-blog-rss (get-in config/defaults [:feeds :lambdax-blog :url])
         lambdax-twitter-user (get-in config/defaults [:feeds :lambdax-twitter :user])
         last-blog-post (last-statuses 1 lambdax-blog-rss)]
-    (println "Fetched " last-blog-post "from" lambdax-blog-rss)
     (->> (if (older-than-month? last-blog-post)
            (last-tweets 3 lambdax-twitter-user)
            (concat (last-tweets 2 lambdax-twitter-user) last-blog-post))
