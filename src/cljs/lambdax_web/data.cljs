@@ -38,15 +38,21 @@
 (def team [{:name "Andrea"
             :title "Hello there!"
             :img {:src "img/boy.svg"
-                  :alt "Andrea"}}
+                  :alt "Andrea"}
+            :imgreal {:src "img/andrea.png"
+                              :alt "Andrea"}}
            {:name "Dajana"
             :title "Hello there!"
             :img {:src "img/girl.svg"
-                  :alt "Dajana"}}
+                  :alt "Dajana"}
+            :imgreal {:src "img/dajana.png"
+                              :alt "Dajana"}}
            {:name "Tomek"
             :title "Hello there!"
             :img {:src "img/boy.svg"
-                  :alt "Tomek"}}])
+                  :alt "Tomek"}
+              :imgreal {:src "img/tomek.png"
+                                            :alt "Tomek"}}])
 
 (def sections [{:section-name :about-us
                 :title "About us"

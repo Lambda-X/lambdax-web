@@ -260,13 +260,6 @@ section.slogan {
     margin: 30px 0
 }
 
-.team .image:hover img {
-    -moz-transform: rotate(-90deg);
-    -webkit-transform: rotate(-90deg);
-    -o-transform: rotate(-90deg);
-    -ms-transform: rotate(-90deg);
-    transform: rotate(-90deg);
-}
 
 .team .image:hover .egg {
     opacity: 1;
@@ -513,12 +506,12 @@ input[type="submit"].btn {
     .team .rp-container { padding: 0}
 
     .news-box, .news-box:nth-of-type(2n), .news-box:nth-of-type(2n+1) {
-                                              width: 100%;
-                                              margin: 0 0 30px 0;
-                                              border: 0;
-                                              padding: 10px;
-                                              text-align: left
-                                          }
+        width: 100%;
+        margin: 0 0 30px 0;
+        border: 0;
+        padding: 10px;
+        text-align: left
+    }
 
     .news-box:nth-of-type(2n) .text {
         text-align: left;
