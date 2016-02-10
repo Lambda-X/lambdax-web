@@ -62,15 +62,18 @@
                            :output-to "resources/public/js/compiled/lambdax_web.js"
                            :output-dir "resources/public/js/compiled/out"
                            :source-map-timestamp true}}
-               {:id "prod"
+               {:id "min"
                 :source-paths ["src/cljs" "env/prod/cljs"]
                 :compiler {:main lambdax-web.core
                            :asset-path "js/compiled/out"
                            :output-to "resources/public/js/compiled/lambdax_web.js"
-                           :output-dir "resources/public/js/compiled/out"
+                           :optimize-constants true
+                           :static-fns true
+                           :elide-asserts true
+                           :pretty-print false
                            :source-map-timestamp true
                            :optimization :advanced}}]}
-  
+
   :figwheel {;; :http-server-root "public" ;; default and assumes "resources"
              ;; :server-port 3449 ;; default
              ;; :server-ip "127.0.0.1"
@@ -102,5 +105,5 @@
              ;; :server-logfile "tmp/logs/figwheel-logfile.log"
              }
   :aliases {"bg-repl" ["trampoline" "repl" ":headless" ">" "repl.out " "2>" "repl.err" "<" "/dev/null" "&"]
-            "fig-dev" ^{:doc "Start figwheel with dev profile."} ["figwheel" "website"]
-            "fig-dev*" ^{:doc "Clean and start figwheel with dev profile"} ["do" "clean" ["figwheel" "website"]]})
+            "fig-dev" ^{:doc "Start figwheel with dev profile."} ["figwheel" "dev"]
+            "fig-dev*" ^{:doc "Clean and start figwheel with dev profile"} ["do" "clean" ["figwheel" "dev"]]})
