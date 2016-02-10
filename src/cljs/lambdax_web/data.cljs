@@ -27,12 +27,13 @@
               ClojureScript Read-Eval-Print-Loops."
                 :tags "clojure, lib, functional programing"
                 :img {:src "img/replumb.svg"
-                      :alt "replumb"}}
-               {:title "Live demo of replumb
-              created with clojure script."
+                      :alt "replumb"}
+                :url "https://github.com/Lambda-X/replumb"}
+               {:title "Clojurescript.io - A live Repl, featuring replumb."
                 :tags "clojurescript, website, live demo"
-                :img {:src "img/replumb.svg"
-                      :alt "Replumb"}}])
+                :img {:src "img/clojurescript_io.png"
+                      :alt "clojurescript.io"}
+                :url "https://github.com/Lambda-X/cljs-repl-web"}])
 
 (def team [{:name "Andrea"
             :title "Hello there!"
@@ -46,37 +47,6 @@
             :title "Hello there!"
             :img {:src "img/boy.svg"
                   :alt "Tomek"}}])
-
-(def news [{:title "How awesome Clojure is!"
-            :text "Some random tekst goes here. Some random tekst
-                   goes here. Some random tekst goes here. Some
-                   random tekst goes here. Some random tekst goes here."
-            :date #inst "2016-02-03T15:08:47.000-00:00"
-            :type "BLOG POST"
-            :author "Andrea.Richiardi"
-            :img {:src "img/news.png"
-                  :alt "news"}
-            :link "#"}
-           {:title "How awesome Clojure is!"
-            :text "Some random tekst goes here. Some random tekst
-                   goes here. Some random tekst goes here. Some
-                   random tekst goes here. Some random tekst goes here."
-            :date #inst "2016-02-03T15:08:47.000-00:00"
-            :type "BLOG POST"
-            :author "Andrea.Richiardi"
-            :img {:src "img/news.png"
-                  :alt "news"}
-            :link "#"}
-           {:title "How awesome Clojure is!"
-            :text "Some random tekst goes here. Some random tekst
-                   goes here. Some random tekst goes here. Some
-                   random tekst goes here. Some random tekst goes here."
-            :date #inst "2016-02-03T15:08:47.000-00:00"
-            :type "BLOG POST"
-            :author "Andrea.Richiardi"
-            :img {:src "img/news.png"
-                  :alt "news"}
-            :link "#"}])
 
 (def sections [{:section-name :about-us
                 :title "About us"

@@ -81,12 +81,13 @@
 (defui Projects
   static om/IQuery
   (query [this]
-         [:title :tags :img])
+         [:title :tags :img :url])
   Object
   (render [this]
-          (let [{:keys [title tags img]} (om/props this)]
+          (let [{:keys [title tags img url]} (om/props this)]
             (dom/div (clj->js {:className "inline-block"})
-                     (dom/img (clj->js {:src (:src img) :alt (:alt img)}))
+                     (dom/a (clj->js {:href url})
+                      (dom/img (clj->js {:src (:src img) :alt (:alt img)})))
                      (dom/p nil title)
                      (dom/p #js {:className "tags"}
                             tags)))))
