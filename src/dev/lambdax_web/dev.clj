@@ -1,5 +1,5 @@
 (ns lambdax-web.dev
-  (:require [clojure.pprint :refer [pprint]]
+  (:require [puget.printer :refer [cprint pprint]]
             [clojure.tools.namespace.repl :refer [refresh]]
             [lambdax-web.core :as core]))
 
