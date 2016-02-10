@@ -4,7 +4,8 @@
             [clj-time.core :as t]
             [clj-time.coerce :as c]
             [clojure.string :as string]
-            [feedparser-clj.core :refer :all])
+            [feedparser-clj.core :refer :all]
+            [lambdax-web.config :as config])
   (:import [java.text SimpleDateFormat]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
@@ -19,18 +20,11 @@
 
 (def TwitterDateFormat (SimpleDateFormat. "EEE MMM d HH:mm:ss Z yyyy"))
 
-(def api-key "xSQw3UZy93DromQMPTkkMNgwT")
-
-(def api-secret "ABTdn4qhSUKm80x4d9Q0wT1wrm2HUlLcEOFH3Fr0dOgcsyiGFK")
-
-(def acess-token "4849942733-Bhz6FEO4qjw7s16kroRiO924KoLqtbHY0PeSORF")
-
-(def acess-token-secret "d9HNMN1sVqJPmo97Y9NAdYzQVGKD3p5zsjgkxvEZsyM5q")
-
-(def my-creds (make-oauth-creds api-key
-                                api-secret
-                                acess-token
-                                acess-token-secret))
+(def my-creds (let [twitter-feed (get-in config/defaults [:feeds :lambdax-twitter])]
+                (make-oauth-creds (:api-key twitter-feed)
+                                  (:api-secret twitter-feed)
+                                  (:access-token twitter-feed)
+                                  (:access-token-secret twitter-feed))))
 
 (def tweet-keys-to-select [:text :created_at :screen-name :entities])
 
@@ -80,22 +74,13 @@
                         :value
                         (string/split #"<p>")
                         second
-                        (string/replace #"</p>" "")) 
+                        (string/replace #"</p>" ""))
                     ;;(:value (first contents))
                     published-date
                     :blog-post
                     link
                     {:src "img/news.png"
                      :alt "news"})))))
-
-
-;;;;;;;;;;;;;;;;;;;;;
-;;;;; Endpoints ;;;;;
-;;;;;;;;;;;;;;;;;;;;;
-
-(def twitter-user "scalac_io")
-
-(def blog-rss "http://lambdax-blog-devel.scalac.io/blog/feed.xml")
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;; Last events ;;;;;
@@ -112,8 +97,12 @@
       (> 0)))
 
 (defn last-3-events []
-  (let [last-blog-post (last-statuses 1 blog-rss)]
+  (println "Fetching last 3 events...")
+  (let [lambdax-blog-rss (get-in config/defaults [:feeds :lambdax-blog :url])
+        lambdax-twitter-user (get-in config/defaults [:feeds :lambdax-twitter :user])
+        last-blog-post (last-statuses 1 lambdax-blog-rss)]
+    (println "Fetched " last-blog-post "from" lambdax-blog-rss)
     (->> (if (older-than-month? last-blog-post)
-           (last-tweets 3 twitter-user)
-           (concat (last-tweets 2 twitter-user) last-blog-post))
+           (last-tweets 3 lambdax-twitter-user)
+           (concat (last-tweets 2 lambdax-twitter-user) last-blog-post))
          (sort-by :date))))
