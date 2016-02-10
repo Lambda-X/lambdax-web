@@ -21,7 +21,8 @@
                  [bidi "1.21.1"]
                  [environ "1.0.2"]
                  [org.clojure/tools.nrepl "0.2.12"]
-                 [cider/cider-nrepl "0.11.0-SNAPSHOT"]]
+                 [cider/cider-nrepl "0.11.0-SNAPSHOT"]
+                 [clj-rome "0.4.0"]]
   :plugins [[lein-cljsbuild "1.1.1"]
             [lein-environ "1.0.2"]]
 

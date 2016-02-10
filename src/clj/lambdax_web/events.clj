@@ -5,7 +5,8 @@
             [clj-time.coerce :as c]
             [clojure.string :as string]
             [feedparser-clj.core :refer :all]
-            [lambdax-web.config :as config])
+            [lambdax-web.config :as config]
+            [clj-rome.reader :refer :all])
   (:import [java.text SimpleDateFormat]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
@@ -55,9 +56,9 @@
 (defn rss-feeds
   "Getting all rss feeds from blog"
   [rss-url]
-  (parse-feed rss-url))
+  (build-feed rss-url))
 
-(def rss-keys-to-select [:authors :link :title :published-date :contents :description])
+(def rss-keys-to-select [:description :title :author :published-date :link])
 
 (defn last-statuses [number-of-statuses rss-url]
   (println "Fetching and parsing" rss-url)
@@ -66,17 +67,11 @@
        :entries
        (take number-of-statuses)
        (map
-        #(let [{:keys [authors title link contents published-date description]}
+        #(let [{:keys [description title author published-date link]}
                (select-keys % rss-keys-to-select)]
-           (->Event "The LambdaX Team"
-                    ;;(:name (first authors))
+           (->Event author
                     title
-                    (-> description
-                        :value
-                        (string/split #"<p>")
-                        second
-                        (string/replace #"</p>" ""))
-                    ;;(:value (first contents))
+                    (:value description)
                     published-date
                     :blog-post
                     link
