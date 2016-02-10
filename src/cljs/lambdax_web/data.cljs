@@ -33,7 +33,7 @@
                 :tags "clojurescript, website, live demo"
                 :img {:src "img/clojurescript_io.png"
                       :alt "clojurescript.io"}
-                :url "https://github.com/Lambda-X/cljs-repl-web"}])
+                :url "www.clojurescript.io"}])
 
 (def team [{:name "Andrea"
             :title "Hello there!"
