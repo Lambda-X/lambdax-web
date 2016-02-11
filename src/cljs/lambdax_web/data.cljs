@@ -14,7 +14,8 @@
                 :img {:src "img/icon-contact.svg"
                       :alt "Our culture"}
                 :content {:type :button
-                          :text "contact us"}}])
+                          :text "contact us"
+                          :onclick "#contact"}}])
 
 (def technologies [{:name "ClojureScript"
                     :img {:src "img/cljs.svg"

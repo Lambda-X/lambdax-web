@@ -54,14 +54,15 @@
                      (dom/h3 nil title)
                      (if (= (:type content) :text)
                        (dom/p nil (:text content))
-                       (dom/button (clj->js {:className (-> content
-                                                            :text
-                                                            (split #"\s+")
-                                                            (as-> content-text
-                                                                (->> content-text
-                                                                     (join "-")
-                                                                     (str "btn "))))})
-                                   (:text content)))))))
+                       (dom/a (clj->js {:href (:onclick content)})
+                        (dom/button (clj->js {:className (-> content
+                                                             :text
+                                                             (split #"\s+")
+                                                             (as-> content-text
+                                                                 (->> content-text
+                                                                      (join "-")
+                                                                      (str "btn "))))})
+                                    (:text content))))))))
 
 (def render-about-us (om/factory AboutUs))
 
