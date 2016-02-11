@@ -22,9 +22,9 @@
 (defn render-main-section []
   (dom/section #js {:id "main" :className "full-width"}
                (dom/object #js {:data "img/greg.svg"
-                             :id "greg-svg"
-                             :alt "Greg the programmer"
-                             :type "image/svg+xml"})
+                                :id "greg-svg"
+                                :alt "Greg the programmer"
+                                :type "image/svg+xml"})
                (dom/img #js {:src "img/over-greg.svg"
                              :alt "over"
                              :className "hover-image"})))
@@ -55,14 +55,14 @@
                      (if (= (:type content) :text)
                        (dom/p nil (:text content))
                        (dom/a (clj->js {:href (:onclick content)})
-                        (dom/button (clj->js {:className (-> content
-                                                             :text
-                                                             (split #"\s+")
-                                                             (as-> content-text
-                                                                 (->> content-text
-                                                                      (join "-")
-                                                                      (str "btn "))))})
-                                    (:text content))))))))
+                              (dom/button (clj->js {:className (-> content
+                                                                   :text
+                                                                   (split #"\s+")
+                                                                   (as-> content-text
+                                                                       (->> content-text
+                                                                            (join "-")
+                                                                            (str "btn "))))})
+                                          (:text content))))))))
 
 (def render-about-us (om/factory AboutUs))
 
@@ -88,7 +88,7 @@
           (let [{:keys [title tags img url]} (om/props this)]
             (dom/div (clj->js {:className "inline-block"})
                      (dom/a (clj->js {:href url})
-                      (dom/img (clj->js {:src (:src img) :alt (:alt img)})))
+                            (dom/img (clj->js {:src (:src img) :alt (:alt img)})))
                      (dom/p nil title)
                      (dom/p #js {:className "tags"}
                             tags)))))
@@ -98,16 +98,26 @@
 (defui Team
   static om/IQuery
   (query [this]
-         [:name :title :img])
+         [:name :title :img :socials])
   Object
   (render [this]
-          (let [{:keys [name title img imgreal]} (om/props this)]
+          (let [{:keys [name title img imgreal socials]} (om/props this)]
             (dom/div #js {:className "inline-block"}
                      (dom/div #js {:className "image"}
                               (dom/img (clj->js {:src (:src img) :alt (:alt img)}))
                               (dom/div #js {:className "egg animated"}
                                        (dom/img (clj->js {:src (:src imgreal) :alt (:alt imgreal)}))))
-                     (dom/h3 nil name)))))
+                     (dom/h3 nil name)
+                     (dom/ul #js {:className "team-socials"}
+                             (when (:star socials)
+                               (dom/li nil (dom/a (clj->js {:className "fa fa-star"
+                                                            :href (:star socials)}))))
+                             (when (:github socials)
+                               (dom/li nil (dom/a (clj->js {:className "fa fa-github"
+                                                            :href (:github socials)}))))
+                             (when (:twitter socials)
+                               (dom/li nil (dom/a (clj->js {:className "fa fa-twitter"
+                                                            :href (:twitter socials)})))))))))
 
 (def render-team (om/factory Team))
 
@@ -255,9 +265,9 @@
                           (cycle '("light-theme" "dark-theme")))
                      (if message-sent?
                        (render-footer-section
-                            (dom/div #js {:className "message"}
-                                (dom/h2 nil "Thank You")
-                                (dom/p nil "for getting in touch!")))
+                        (dom/div #js {:className "message"}
+                                 (dom/h2 nil "Thank You")
+                                 (dom/p nil "for getting in touch!")))
                        (render-footer-section (render-contact-form
                                                {:submit-message (fn [new-message]
                                                                   (om/transact! this `[(message/send-message! ~new-message)]))})))))))

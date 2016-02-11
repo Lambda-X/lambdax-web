@@ -265,6 +265,32 @@ section.slogan {
     opacity: 1;
 }
 
+ul.team-socials {
+    list-style-type: none;
+    padding: 0px;
+}
+
+.team-socials li {
+    display: inline-block;
+}
+
+.team-socials a {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-size: 20px;
+    line-height: 30px;
+    background: #ffffff;
+    border-radius: 4em;
+    color: #3f4a52;
+    margin: 0 10px;
+}
+
+.team-socials a:hover {
+    background: #0072bc;
+    color: #ffffff;
+}
 
 /**************** news *******************/
 
@@ -522,12 +548,12 @@ input[type="submit"].btn {
     .team .rp-container { padding: 0}
 
     .news-box, .news-box:nth-of-type(2n), .news-box:nth-of-type(2n+1) {
-        width: 100%;
-        margin: 0 0 30px 0;
-        border: 0;
-        padding: 10px;
-        text-align: left
-    }
+                                              width: 100%;
+                                              margin: 0 0 30px 0;
+                                              border: 0;
+                                              padding: 10px;
+                                              text-align: left
+                                          }
 
     .news-box:nth-of-type(2n) .text {
         text-align: left;

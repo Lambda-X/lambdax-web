@@ -41,19 +41,28 @@
             :img {:src "img/boy.svg"
                   :alt "Andrea"}
             :imgreal {:src "img/andrea.png"
-                              :alt "Andrea"}}
+                      :alt "Andrea"}
+            :socials {:twitter "https://twitter.com/richiardiandrea"
+                      :github "https://github.com/arichiardi"
+                      :star "https://github.com/laurentpetit/ccw/pull/846"}}
            {:name "Dajana"
             :title "Hello there!"
             :img {:src "img/girl.svg"
                   :alt "Dajana"}
             :imgreal {:src "img/dajana.png"
-                              :alt "Dajana"}}
+                      :alt "Dajana"}
+            :socials {:twitter "https://twitter.com/dstiberova"
+                      :github "https://github.com/DajanaStiberova"
+                      :star nil}}
            {:name "Tomek"
             :title "Hello there!"
             :img {:src "img/boy.svg"
                   :alt "Tomek"}
-              :imgreal {:src "img/tomek.png"
-                                            :alt "Tomek"}}])
+            :imgreal {:src "img/tomek.png"
+                      :alt "Tomek"}
+            :socials {:twitter nil
+                      :github "https://github.com/tomasz-biernacki"
+                      :star "https://github.com/Lambda-X/cljs-repl-web/pull/160"}}])
 
 (def sections [{:section-name :about-us
                 :title "About us"
