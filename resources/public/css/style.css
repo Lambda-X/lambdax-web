@@ -375,9 +375,15 @@ section.slogan {
 
 /***************** contact *******************/
 
+.contact {
+    min-height: 440px;
+}
+
 .contact .page-width {
     position: relative;
 }
+
+.contact .inline-block { vertical-align: middle}
 
 .contact img {
     width: 350px;
@@ -426,6 +432,7 @@ input {
     outline: none;
     font-family: 'Open Sans';
     font-weight: 300;
+    color: #ffffff;
 }
 
 input:first-of-type {
@@ -484,6 +491,15 @@ input[type="submit"].btn {
     color:    #ffffff;
 }
 
+.vertical-centered {
+    display: table;
+}
+
+.message {
+    font-size: 1.4em;
+    vertical-align: middle
+}
+
 
 
 /***** greg ****/
@@ -530,7 +546,7 @@ input[type="submit"].btn {
         margin-bottom: 30px;
     }
 
-    .contact {text-align: center}
+    .contact {text-align: center;}
     .contact .inline-block:first-of-type { display: none}
     .contact img {
         position: relative;

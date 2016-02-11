@@ -253,7 +253,10 @@
                           sections
                           (cycle '("light-theme" "dark-theme")))
                      (if message-sent?
-                       (render-footer-section "Thank you for getting in touch!")
+                       (render-footer-section
+                            (dom/div #js {:className "message"},
+                                (dom/h2 nil "Thank You")
+                                (dom/p nil "for getting in touch!")))
                        (render-footer-section (render-contact-form
                                                {:submit-message (fn [new-message]
                                                                   (om/transact! this `[(message/send-message! ~new-message)]))})))))))
