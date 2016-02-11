@@ -78,4 +78,6 @@
 
   :aliases {"bg-repl" ["trampoline" "repl" ":headless" ">" "repl.out " "2>" "repl.err" "&"]
             "fig-dev" ^{:doc "Start figwheel with dev profile."} ["figwheel" "dev"]
-            "fig-dev*" ^{:doc "Clean and start figwheel with dev profile"} ["do" "clean" ["figwheel" "dev"]]})
+            "fig-dev*" ^{:doc "Clean and start figwheel with dev profile"} ["do" "clean" ["figwheel" "dev"]]
+            "minify" ^{:doc "Compile sources minified for production."} ["cljsbuild" "once" "min"]
+            "minify*" ^{:doc "Clean and compile sources minified for production."} ["do" "clean" ["cljsbuild" "once" "min"]]})
