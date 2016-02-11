@@ -9,7 +9,7 @@
                 :img {:src "img/icon-fp.svg"
                       :alt "Our culture"}
                 :content {:type :text
-                          :text "Clojure embraces functional programming, provides excellent built-in concurrency support and targets several platforms, most notably the JVM and JavaScript (Node.js included). The result is robust, practical, and fast. You business drives."}}
+                          :text "Clojure embraces functional programming, provides excellent built-in concurrency support and targets several platforms, most notably the JVM and JavaScript (Node.js included). The result is robust, practical, and fast. Your business drives."}}
                {:title "We are ready to help you"
                 :img {:src "img/icon-contact.svg"
                       :alt "Our culture"}
