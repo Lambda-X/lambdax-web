@@ -65,7 +65,6 @@
                {:id "min"
                 :source-paths ["src/cljs" "env/prod/cljs"]
                 :compiler {:main lambdax-web.core
-                           :asset-path "js/compiled/out"
                            :output-to "resources/public/js/compiled/lambdax_web.js"
                            :optimize-constants true
                            :static-fns true
