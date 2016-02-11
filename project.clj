@@ -51,7 +51,7 @@
                  :repl-options {:init-ns lambdax-web.dev}}
    :profiles/dev {}}
 
-  :clean-targets ^{:protect false} ["resources/public/js/compiled" "target"]
+  :clean-targets ^{:protect false} ["resources/public/js/compiled" :target-path]
 
   :cljsbuild {:builds
               [{:id "dev"
