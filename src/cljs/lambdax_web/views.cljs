@@ -39,8 +39,8 @@
                                              :alt "Lambdax"}))
                         (dom/div #js {:className "inline-block slogan"}
                                  (dom/h1 nil "Putting (defn) back into programming")
-                                 (dom/p nil "We are the first Clojure centring software house.")
-                                 (dom/p nil "Functional experts dedicated to clojure and clojure script.")))))
+                                 (dom/p nil "We are Clojure centring software house.")
+                                 (dom/p nil "Functional experts dedicated to Clojure and ClojureScript.")))))
 
 (defui AboutUs
   static om/IQuery
@@ -254,7 +254,10 @@
                           sections
                           (cycle '("light-theme" "dark-theme")))
                      (if message-sent?
-                       (render-footer-section "Thank you for getting in touch!")
+                       (render-footer-section
+                            (dom/div #js {:className "message"}
+                                (dom/h2 nil "Thank You")
+                                (dom/p nil "for getting in touch!")))
                        (render-footer-section (render-contact-form
                                                {:submit-message (fn [new-message]
                                                                   (om/transact! this `[(message/send-message! ~new-message)]))})))))))
