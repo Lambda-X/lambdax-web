@@ -50,7 +50,11 @@ variables.
 
 To create a production build run:
 
-`boot production-build`
+`boot prod-build`
+
+To create a development build run:
+
+`boot dev-build`
 
 And you will find the build in `target` ready to be deployed as it is.
 
