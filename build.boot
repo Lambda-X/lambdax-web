@@ -38,11 +38,11 @@
                     :description "The LambdaX official website project"
                     :license {"Eclipse Public License" "http://www.eclipse.org/legal/epl-v10.html"}})
 
-(def devel-options
+(def dev-options
   {:optimization :none
    :source-map-timestamp true})
 
-(def production-options
+(def prod-options
   {:closure-defines {"goog.DEBUG" false}
    :optimize-constants true
    :static-fns true
@@ -51,11 +51,20 @@
    :source-map-timestamp true
    :parallel-build true})
 
-(deftask production-build []
+(deftask dev-build []
+  (set-env! :source-paths #{"src/cljs" "env/dev/cljs"}
+            :resource-paths #{"resources/public"})
+  (comp (cljs :optimizations :simple
+              :compiler-options dev-options
+              :source-map true)
+        (sift :include #{#"\.out"} :invert true)
+        (target)))
+
+(deftask prod-build []
   (set-env! :source-paths #{"src/cljs" "env/prod/cljs"}
             :resource-paths #{"resources/public"})
   (comp (cljs :optimizations :advanced
-              :compiler-options production-options
+              :compiler-options prod-options
               :source-map true)
         (sift :include #{#"\.out"} :invert true)
         (target)))
@@ -84,12 +93,4 @@
         (watch)
         (cljs-repl)
         (reload)
-        (cljs :compiler-options devel-options)))
-
-(deftask dump-dev
-  "Dumps the dev config in target/"
-  []
-  (set-env! :source-paths #{"src/cljs" "env/dev/cljs"}
-            :resource-paths #{"resources/public"})
-  (comp (cljs :compiler-options devel-options)
-        (target)))
+        (cljs :compiler-options dev-options)))

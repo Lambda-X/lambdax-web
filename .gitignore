@@ -16,3 +16,6 @@ pom.xml
 repl.err
 repl.out
 nohup.out
+.DS_Store
+.nrepl-history
+profiles.clj
