@@ -54,7 +54,7 @@
 (deftask dev-build []
   (set-env! :source-paths #{"src/cljs" "env/dev/cljs"}
             :resource-paths #{"resources/public"})
-  (comp (cljs :optimizations :advanced
+  (comp (cljs :optimizations :simple
               :compiler-options dev-options
               :source-map true)
         (sift :include #{#"\.out"} :invert true)
@@ -94,11 +94,3 @@
         (cljs-repl)
         (reload)
         (cljs :compiler-options dev-options)))
-
-(deftask dump-dev
-  "Dumps the dev config in target/"
-  []
-  (set-env! :source-paths #{"src/cljs" "env/dev/cljs"}
-            :resource-paths #{"resources/public"})
-  (comp (cljs :compiler-options dev-options)
-        (target)))
