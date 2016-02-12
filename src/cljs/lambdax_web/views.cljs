@@ -39,7 +39,7 @@
                                              :alt "Lambdax"}))
                         (dom/div #js {:className "inline-block slogan"}
                                  (dom/h1 nil "Putting (defn) back into programming")
-                                 (dom/p nil "We are Clojure centring software house.")
+                                 (dom/p nil "We are Clojure-centric software house.")
                                  (dom/p nil "Functional experts dedicated to Clojure and ClojureScript.")))))
 
 (defui AboutUs

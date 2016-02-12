@@ -50,18 +50,17 @@ variables.
 
 To create a production build run:
 
-`lein cljsbuild once min`
+`boot production-build`
 
-And open your browser in `resources/public/index.html`. You will not
-get live reloading, nor a REPL.
+And you will find the build in `target` ready to be deployed as it is.
 
 ### Develop
 
 To get an interactive development environment run:
 
-`lein figwheel website` or `lein fig-dev*` (the asterisk includes `clean`)
+`boot dev` or `boot cider dev` (for including cider/refactor-nrepl middleware`)
 
-and open your browser at [localhost:3449](http://localhost:3449/).
+and open your browser at [localhost:3000](http://localhost:3000/).
 This will auto compile and send all changes to the browser without the
 need to reload. After the compilation process is complete, you will
 get a Browser Connected REPL. An easy way to try it is:
