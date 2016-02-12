@@ -31,12 +31,11 @@
    :webserver (component/using
                (webserver/new-server (:port config-map)
                                      (:build config-map)
+                                     (or (env :access-domain)
+                                         (:access-domain config-map))
                                      (:pre-middleware config-map)
                                      (:post-middleware config-map))
                [:app])
    :repl (repl/new-repl-server (:nrepl-port config-map)
                                (:build config-map))))
 
-(defn read-domain []
-  (or (env :access-domain)
-      (:access-domain config/defaults)))
