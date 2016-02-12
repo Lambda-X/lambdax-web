@@ -25,14 +25,17 @@
    :app (app/new-app (:name config-map)
                      (:version config-map))
    :scheduler (component/using
-                (scheduler/new-scheduler scheduler/fetch-events!
-                                         (:fetch-interval config-map))
-                [:app])
+               (scheduler/new-scheduler scheduler/fetch-events!
+                                        (:fetch-interval config-map))
+               [:app])
    :webserver (component/using
-                (webserver/new-server (:port config-map)
-                                      (:build config-map)
-                                      (:pre-middleware config-map)
-                                      (:post-middleware config-map))
-                [:app])
+               (webserver/new-server (:port config-map)
+                                     (:build config-map)
+                                     (or (env :access-domain)
+                                         (:access-domain config-map))
+                                     (:pre-middleware config-map)
+                                     (:post-middleware config-map))
+               [:app])
    :repl (repl/new-repl-server (:nrepl-port config-map)
                                (:build config-map))))
+

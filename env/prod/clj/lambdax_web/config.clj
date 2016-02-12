@@ -7,6 +7,7 @@
    :build :prod
    :nrepl-port 0 ;; auto select
    :port 3001
+   :access-domain "http://lambdax.io/"
    :feeds {:lambdax-blog {:name "LambdaX Blog RSS"
                           :type :rss
                           :url "http://de139ge9we8jv.cloudfront.net/blog/feed.xml"}
