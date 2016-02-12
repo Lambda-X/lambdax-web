@@ -1,44 +1,28 @@
 (ns lambdax-web.core
-  (:require [lambdax-web.twitter-feed :as tf]
-            [lambdax-web.rss-blog :as rss]
-            [com.stuartsierra.component :as component]
-            [overtone.at-at :refer :all]
-            [clj-time.core :as t]
-            [clj-time.format :as f]
-            [clj-time.coerce :as c]))
+  (:require [com.stuartsierra.component :as component]
+            [lambdax-web.system :as sys])
+  (:gen-class))
 
-(def twitter-user "scalac_io")
+(def system nil)
 
-(def blog-rss "http://blog.scalac.io/feeds/index.xml")
+(defn init []
+  (let [config (sys/make-config)]
+    (println "[Initializing]" (:name config) (when (:version config)
+                                               (str "- " (:version config))))
+    (->> config
+         (sys/new-system)
+         (constantly)
+         (alter-var-root #'system))))
 
-;; Last events
+(defn start []
+  (do (println "Starting system...")
+      (alter-var-root #'system component/start)))
 
-(defn older-than-month? [blog-post]
-  "Is blog post older than month?"
-  (-> blog-post
-      first
-      :date
-      c/from-date
-      (t/interval (t/now))
-      t/in-months
-      (> 0)))
+(defn stop []
+  (do (println "Stopping system...")
+      (alter-var-root #'system #(some-> % component/stop))))
 
-(defn last-3-events []
-  (let [last-blog-post (rss/last-statuses 1 blog-rss)]
-    (->> (if (older-than-month? last-blog-post)
-           (tf/last-tweets 3 twitter-user)
-           (concat (tf/last-tweets 2 twitter-user) last-blog-post))
-         (sort-by :created_at))))
-
-;; SCHEDULER
-
-(def my-pool (mk-pool))
-
-(defn run-scheduler! [time-in-ms]
-  (every time-in-ms #(last-3-events) my-pool))
-
-(defn stop-and-reset-scheduler! []
-  (stop-and-reset-pool! my-pool))
-
-(defn kill-scheduler! []
-  (stop-and-reset-pool! my-pool :strategy :kill))
+(defn -main [& args]
+  (.addShutdownHook (Runtime/getRuntime) (Thread. #(do (stop) (shutdown-agents))))
+  (init)
+  (start))

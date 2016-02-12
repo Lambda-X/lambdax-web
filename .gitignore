@@ -11,3 +11,8 @@ pom.xml
 .lein-plugins/
 .repl
 .nrepl-port
+.lein-env
+.dir-locals.el
+repl.err
+repl.out
+nohup.out
