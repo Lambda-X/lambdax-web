@@ -5,7 +5,7 @@
             [ring.middleware.content-type :refer [wrap-content-type]]
             [ring.middleware.not-modified :refer [wrap-not-modified]]
             [lambdax-web.util :as util]
-            [lambdax-web.config :as config]))
+            [lambdax-web.system :as system]))
 
 (defn index [_]
   (assoc (resource-response "index.html" {:root "public"})
@@ -31,15 +31,11 @@
         "/events"
         {:get {[""] :events}}}])
 
-(defn read-domain []
-  (or (System/getenv "ACCESS_DOMAIN")
-      (:access-domain (config/defaults))))
-
 (def match->handler
   {:index index
    :events (->> events
                 wrap-transit-response
-                (wrap-cors (read-domain)))})
+                (wrap-cors (system/read-domain)))})
 
 (defn route-handler [{:keys [uri request-method] :as req}]
   (let [match (bidi/match-route routes uri :request-method request-method)]
