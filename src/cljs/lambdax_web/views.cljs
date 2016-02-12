@@ -39,7 +39,7 @@
                                              :alt "Lambdax"}))
                         (dom/div #js {:className "inline-block slogan"}
                                  (dom/h1 nil "Putting (defn) back into programming")
-                                 (dom/p nil "We are Clojure-centric software house.")
+                                 (dom/p nil "We are a Clojure-centric software house.")
                                  (dom/p nil "Functional experts dedicated to Clojure and ClojureScript.")))))
 
 (defui AboutUs
@@ -186,7 +186,7 @@
                         (dom/div #js {:className "rp-container three-part"}
                                  (dom/div #js {:className "inline-block"})
                                  (dom/div #js {:className "inline-block"}
-                                          (dom/h2 nil "Connect with us at")
+                                          (dom/h2 nil "Connect with us on")
                                           ;;(dom/p nil "You can also catch us up via our social accounts! Observe us to stay in touch.")
                                           (dom/div #js {:className "socials"}
                                                    (dom/a #js {:href "http://facebook.com" :title "Facebook" :rel "nofollow"}
