@@ -4,7 +4,8 @@
             [ring.middleware.resource :refer [wrap-resource]]
             [ring.middleware.content-type :refer [wrap-content-type]]
             [ring.middleware.not-modified :refer [wrap-not-modified]]
-            [lambdax-web.util :as util]))
+            [lambdax-web.util :as util]
+            [lambdax-web.config :as config]))
 
 (defn index [_]
   (assoc (resource-response "index.html" {:root "public"})
@@ -15,6 +16,11 @@
     {:status 200
      :headers {"Content-Type" "application/transit+json"}
      :body (-> req handler util/write-transit)}))
+(defn wrap-cors [domain handler]
+  (fn [req]
+    (-> req
+        handler
+        (assoc :headers "Access-Control-Allow-Origin" domain))))
 
 (defn events [{:keys [app-state]}]
   (let [events (:events @app-state)]
@@ -25,9 +31,15 @@
         "/events"
         {:get {[""] :events}}}])
 
+(defn read-domain []
+  (or (System/getenv "ACCESS_DOMAIN")
+      (:access-domain (config/defaults))))
+
 (def match->handler
   {:index index
-   :events (wrap-transit-response events)})
+   :events (->> events
+                wrap-transit-response
+                (wrap-cors (read-domain)))})
 
 (defn route-handler [{:keys [uri request-method] :as req}]
   (let [match (bidi/match-route routes uri :request-method request-method)]

@@ -8,6 +8,7 @@
    :build :dev
    :nrepl-port 0 ;; auto select
    :port 3000
+   :access-domain "*"
    :feeds {:lambdax-blog {:name "LambdaX Blog RSS"
                           :type :rss
                           :url "http://de139ge9we8jv.cloudfront.net/blog/feed.xml"}
