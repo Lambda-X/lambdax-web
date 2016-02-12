@@ -16,3 +16,4 @@ pom.xml
 repl.err
 repl.out
 nohup.out
+.DS_Store
