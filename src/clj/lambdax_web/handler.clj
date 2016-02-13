@@ -13,7 +13,7 @@
 (defn wrap-transit-response [handler]
   (fn [req]
     {:status 200
-     :headers {"Content-Type" "application/transit+json"}
+     :headers {"Content-Type" "application/transit+json;charset=utf-8"}
      :body (-> req handler util/write-transit)}))
 
 (defn events [{:keys [app-state]}]
