@@ -64,7 +64,7 @@
                                                                       (str "btn "))))})
                                     (:text content))))))))
 
-(def render-about-us (om/factory AboutUs))
+(def render-about-us (om/factory AboutUs {:keyfn :title}))
 
 (defui Technologies
   static om/IQuery
@@ -77,7 +77,7 @@
                      (dom/img (clj->js {:src (:src img) :alt (:alt img)}))
                      (dom/h2 nil name)))))
 
-(def render-technologies (om/factory Technologies))
+(def render-technologies (om/factory Technologies {:keyfn :name}))
 
 (defui Projects
   static om/IQuery
@@ -93,7 +93,7 @@
                      (dom/p #js {:className "tags"}
                             tags)))))
 
-(def render-projects (om/factory Projects))
+(def render-projects (om/factory Projects {:keyfn :title}))
 
 (defui Team
   static om/IQuery
@@ -109,7 +109,7 @@
                                        (dom/img (clj->js {:src (:src imgreal) :alt (:alt imgreal)}))))
                      (dom/h3 nil name)))))
 
-(def render-team (om/factory Team))
+(def render-team (om/factory Team {:keyfn :name}))
 
 (defui News
   static om/IQuery
@@ -141,7 +141,7 @@
                                     t/month
                                     (get number->month)))))))
 
-(def render-news (om/factory News))
+(def render-news (om/factory News {:keyfn :link}))
 
 (def ^:private section->content
   {:about-us render-about-us
@@ -176,7 +176,7 @@
                                                        "rp-container")})
                                            (map (get section->content section-name) content)))))))
 
-(def render-section (om/factory Section))
+(def render-section (om/factory Section {:keyfn (comp name :section-name)}))
 
 (defn render-footer-section [contact-form]
   (dom/section #js {:id "contact" :className "dark-theme contact"}
