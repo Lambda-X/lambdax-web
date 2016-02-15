@@ -3,6 +3,6 @@
 (def defaults
   {:name "LambdaX Website"
    :production? true
-   :events {:url "http://backend.lambdax.io/prod/events"
-            :interval 180000}
+   :events {:interval 3600000 ;; in milliseconds
+            :url "http://backend.lambdax.io/prod/events"}
    :contact-form {:email "sales@scalac.io"}})
