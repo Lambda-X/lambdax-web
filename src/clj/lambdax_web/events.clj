@@ -6,7 +6,8 @@
             [clojure.string :as string]
             [lambdax-web.config :as config]
             [clj-rome.reader :as rome])
-  (:import [java.text SimpleDateFormat]))
+  (:import [java.text SimpleDateFormat]
+           [java.util Locale]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;; Event record ;;;;;
@@ -18,7 +19,7 @@
 ;;;;; Twitter feeds ;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(def TwitterDateFormat (SimpleDateFormat. "EEE MMM d HH:mm:ss Z yyyy"))
+(def TwitterDateFormat (SimpleDateFormat. "EE MMM dd HH:mm:ss z yyyy" Locale/ENGLISH))
 
 (def my-creds (let [twitter-feed (get-in config/defaults [:feeds :lambdax-twitter])]
                 (make-oauth-creds (:api-key twitter-feed)
