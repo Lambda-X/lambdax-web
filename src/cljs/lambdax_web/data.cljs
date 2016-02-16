@@ -52,7 +52,7 @@
             :imgreal {:src "img/dajana.png"
                       :alt "Dajana"}
             :socials {:twitter "https://twitter.com/dstiberova"
-                      :github "https://github.com/DajanaStiberova"
+                      :github "https://github.com/dstiberova"
                       :star nil}}
            {:name "Tomek"
             :title "Hello there!"
@@ -60,7 +60,7 @@
                   :alt "Tomek"}
             :imgreal {:src "img/tomek.png"
                       :alt "Tomek"}
-            :socials {:twitter nil
+            :socials {:twitter "https://twitter.com/tbiernacki901"
                       :github "https://github.com/tomasz-biernacki"
                       :star "https://github.com/Lambda-X/cljs-repl-web/pull/160"}}])
 
