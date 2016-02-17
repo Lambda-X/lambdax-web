@@ -50,7 +50,7 @@ variables.
 
 To create a production build run (where `|` is or):
 
-`boot -e flavor=fronted|backend build -t prod|dev`
+`boot -e flavor=frontend|backend build -t prod|dev`
 
 And you will find the build in `target` ready to be deployed as it is.
 
@@ -58,11 +58,11 @@ And you will find the build in `target` ready to be deployed as it is.
 
 To get an interactive development environment run:
 
-`boot -e flavor=fronted|backend dev`
+`boot -e flavor=frontend|backend dev`
 
 or for including cider/refactor-nrepl middleware:
  
-`boot -e flavor=fronted|backend cider dev`
+`boot -e flavor=frontend|backend cider dev`
 
 and open your browser at [localhost:3000](http://localhost:3000/).
 This will auto compile and send all changes to the browser without the
