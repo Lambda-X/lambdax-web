@@ -10,7 +10,7 @@
    :access-domain "http://lambdax.io/"
    :feeds {:lambdax-blog {:name "LambdaX Blog RSS"
                           :type :rss
-                          :url "http://de139ge9we8jv.cloudfront.net/blog/feed.xml"}
+                          :url "http://lambdax.io/blog/feed.xml"}
            :lambdax-twitter {:name "LambdaX Twitter Timeline"
                              :type :twitter
                              :user "lambdax_io"
