@@ -169,18 +169,3 @@
     (let [options (options sel)]
       (apply merge-env! (reduce #(into %2 %1) [] (:env options)))
       (:dev-task options))))
-
-(deftask cider
-  "Add CIDER support:
-   https://github.com/boot-clj/boot/wiki/Cider-REPL"
-  []
-  (require 'boot.repl)
-  (swap! @(resolve 'boot.repl/*default-dependencies*)
-         concat '[[cider/cider-nrepl "0.11.0-SNAPSHOT"]
-                  [venantius/ultra "0.4.0"]
-                  [org.clojure/tools.nrepl "0.2.12"]
-                  [refactor-nrepl "2.0.0-SNAPSHOT"]])
-  (swap! @(resolve 'boot.repl/*default-middleware*)
-         concat '[refactor-nrepl.middleware/wrap-refactor
-                  cider.nrepl/cider-middleware])
-  identity)
