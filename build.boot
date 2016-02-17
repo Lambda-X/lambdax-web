@@ -102,8 +102,8 @@
                                               :pretty-print false
                                               :source-map-timestamp true
                                               :parallel-build true})
-                     (sift :include #{#"\.out"}
-                           :invert true)
+                     ;; AR - main.out is needed for source maps!
+                     ;; (sift :include #{#"\.out"} :invert true)
                      (target))
    :dev-task identity})
 

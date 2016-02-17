@@ -28,7 +28,7 @@ This will create `target/lambdax-web-standalone.jar` that can be launched in a s
 
 # export LAMBDAX_WEB_PORT=3000              # default for Prod is 3001
 # export LAMBDAX_WEB_NREPL_PORT=45555       # default is 0, aka auto selection
-# export LAMBDAX_WEB_FETCH_EVERY=           # default 360000 (in seconds)
+# export LAMBDAX_WEB_FETCH_EVERY=           # default 3600000 (in milliseconds)
 
 export LAMBDAX_WEB_VERSION=0.1.0-SNAPSHOT   # not shown unless specified with this variable
 java -jar target/lambdax-web-standalone.jar

@@ -4,7 +4,7 @@
 
 (def defaults
   {:name "LamdbaX Website Backend (DEV)"
-   :fetch-interval 4000
+   :fetch-interval 600000 ;; milliseconds
    :build :dev
    :nrepl-port 0 ;; auto select
    :port 3000
