@@ -67,6 +67,19 @@
                     :description "The LambdaX official website project"
                     :license {"Eclipse Public License" "http://www.eclipse.org/legal/epl-v10.html"}})
 
+;;;;;;;;;;;;;;;;;;;;;;;;
+;;;   Custom Tasks   ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;
+
+(deftask version-file
+  "A task that includes the version.properties file in the fileset."
+  []
+  (boot.util/info "Add version.properties...\n")
+  (with-pre-wrap [fileset]
+    (-> fileset
+        (add-resource (java.io.File. ".") :include #{#"^version\.properties$"})
+        commit!)))
+
 ;;;;;;;;;;;;;;;;;;;;;;
 ;;;    Options     ;;;
 ;;;;;;;;;;;;;;;;;;;;;;
@@ -86,6 +99,7 @@
                    (watch)
                    (cljs-repl)
                    (reload)
+                   (version-file)
                    (cljs :optimizations :none
                          :source-map true
                          :compiler-options {:source-map-timestamp true}))})
@@ -102,6 +116,7 @@
                                               :pretty-print false
                                               :source-map-timestamp true
                                               :parallel-build true})
+                     (version-file)
                      ;; AR - main.out is needed for source maps!
                      ;; (sift :include #{#"\.out"} :invert true)
                      (target))
@@ -110,6 +125,7 @@
 (def backend-build-task
   (comp (aot :all true)
         (uber)
+        (version-file)
         (jar :main 'lambdax-web.core
              :file "lambdax-web-standalone.jar")
         (target)))
