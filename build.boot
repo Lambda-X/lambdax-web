@@ -6,20 +6,20 @@
                    [adzerk/boot-cljs            "1.7.228-1" :scope "test"]
                    [pandeiro/boot-http          "0.7.1-SNAPSHOT" :scope "test"]
                    [adzerk/boot-reload          "0.4.4" :scope "test"]
-                   [degree9/boot-semver         "1.2.0" :scope "test"]
+                   [degree9/boot-semver         "1.2.4" :scope "test"]
                    ;; Repl
                    [adzerk/boot-cljs-repl       "0.3.0"]
                    [com.cemerick/piggieback     "0.2.1"  :scope "test"]
                    [weasel                      "0.7.0"  :scope "test"]
                    [org.clojure/tools.nrepl     "0.2.12" :scope "test"]])
 
-(def fronted-deps '[[org.clojure/clojure         "1.7.0"]
-                    [org.clojure/clojurescript   "1.7.228"]
-                    [org.clojure/core.async      "0.2.371" :scope "test"]
-                    [org.omcljs/om               "1.0.0-alpha28"]
-                    [twitter-api                 "0.7.8"]
-                    [com.cognitect/transit-cljs  "0.8.237"]
-                    [com.andrewmcveigh/cljs-time "0.3.14"]])
+(def frontend-deps '[[org.clojure/clojure         "1.7.0" :scope "provided"]
+                     [org.clojure/clojurescript   "1.7.228" :scope "provided"]
+                     [org.clojure/core.async      "0.2.371" :scope "test"]
+                     [org.omcljs/om               "1.0.0-alpha28"  :scope "provided"]
+                     [twitter-api                 "0.7.8" :scope "provided"]
+                     [com.cognitect/transit-cljs  "0.8.237" :scope "provided"]
+                     [com.andrewmcveigh/cljs-time "0.3.14" :scope "provided"]])
 
 (def backend-dev-deps '[[prone "1.0.1"]
                         [ring/ring-mock "0.3.0"]
@@ -46,7 +46,7 @@
 
 (def deps
   (case (get-env :flavor)
-    "frontend" (vec (distinct (concat common-deps fronted-deps)))
+    "frontend" (vec (distinct (concat common-deps frontend-deps)))
     "backend" (vec (distinct (concat common-deps backend-deps backend-dev-deps)))
     (do (boot.util/warn "You need to specify a flavor with -e flavor=frontend|backend for build and dev task to work\n")
         common-deps)))
@@ -67,6 +67,19 @@
                     :description "The LambdaX official website project"
                     :license {"Eclipse Public License" "http://www.eclipse.org/legal/epl-v10.html"}})
 
+;;;;;;;;;;;;;;;;;;;;;;;;
+;;;   Custom Tasks   ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;
+
+(deftask version-file
+  "A task that includes the version.properties file in the fileset."
+  []
+  (boot.util/info "Add version.properties...\n")
+  (with-pre-wrap [fileset]
+    (-> fileset
+        (add-resource (java.io.File. ".") :include #{#"^version\.properties$"})
+        commit!)))
+
 ;;;;;;;;;;;;;;;;;;;;;;
 ;;;    Options     ;;;
 ;;;;;;;;;;;;;;;;;;;;;;
@@ -86,6 +99,7 @@
                    (watch)
                    (cljs-repl)
                    (reload)
+                   (version-file)
                    (cljs :optimizations :none
                          :source-map true
                          :compiler-options {:source-map-timestamp true}))})
@@ -102,6 +116,7 @@
                                               :pretty-print false
                                               :source-map-timestamp true
                                               :parallel-build true})
+                     (version-file)
                      ;; AR - main.out is needed for source maps!
                      ;; (sift :include #{#"\.out"} :invert true)
                      (target))
@@ -110,6 +125,7 @@
 (def backend-build-task
   (comp (aot :all true)
         (uber)
+        (version-file)
         (jar :main 'lambdax-web.core
              :file "lambdax-web-standalone.jar")
         (target)))
@@ -153,18 +169,3 @@
     (let [options (options sel)]
       (apply merge-env! (reduce #(into %2 %1) [] (:env options)))
       (:dev-task options))))
-
-(deftask cider
-  "Add CIDER support:
-   https://github.com/boot-clj/boot/wiki/Cider-REPL"
-  []
-  (require 'boot.repl)
-  (swap! @(resolve 'boot.repl/*default-dependencies*)
-         concat '[[cider/cider-nrepl "0.11.0-SNAPSHOT"]
-                  [venantius/ultra "0.4.0"]
-                  [org.clojure/tools.nrepl "0.2.12"]
-                  [refactor-nrepl "2.0.0-SNAPSHOT"]])
-  (swap! @(resolve 'boot.repl/*default-middleware*)
-         concat '[refactor-nrepl.middleware/wrap-refactor
-                  cider.nrepl/cider-middleware])
-  identity)
