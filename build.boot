@@ -13,13 +13,13 @@
                    [weasel                      "0.7.0"  :scope "test"]
                    [org.clojure/tools.nrepl     "0.2.12" :scope "test"]])
 
-(def fronted-deps '[[org.clojure/clojure         "1.7.0" :scope "provided"]
-                    [org.clojure/clojurescript   "1.7.228" :scope "provided"]
-                    [org.clojure/core.async      "0.2.371" :scope "test"]
-                    [org.omcljs/om               "1.0.0-alpha28"  :scope "provided"]
-                    [twitter-api                 "0.7.8" :scope "provided"]
-                    [com.cognitect/transit-cljs  "0.8.237" :scope "provided"]
-                    [com.andrewmcveigh/cljs-time "0.3.14" :scope "provided"]])
+(def frontend-deps '[[org.clojure/clojure         "1.7.0" :scope "provided"]
+                     [org.clojure/clojurescript   "1.7.228" :scope "provided"]
+                     [org.clojure/core.async      "0.2.371" :scope "test"]
+                     [org.omcljs/om               "1.0.0-alpha28"  :scope "provided"]
+                     [twitter-api                 "0.7.8" :scope "provided"]
+                     [com.cognitect/transit-cljs  "0.8.237" :scope "provided"]
+                     [com.andrewmcveigh/cljs-time "0.3.14" :scope "provided"]])
 
 (def backend-dev-deps '[[prone "1.0.1"]
                         [ring/ring-mock "0.3.0"]
@@ -46,7 +46,7 @@
 
 (def deps
   (case (get-env :flavor)
-    "frontend" (vec (distinct (concat common-deps fronted-deps)))
+    "frontend" (vec (distinct (concat common-deps frontend-deps)))
     "backend" (vec (distinct (concat common-deps backend-deps backend-dev-deps)))
     (do (boot.util/warn "You need to specify a flavor with -e flavor=frontend|backend for build and dev task to work\n")
         common-deps)))
