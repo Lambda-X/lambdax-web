@@ -74,8 +74,8 @@
 (deftask version-file
   "A task that includes the version.properties file in the fileset."
   []
-  (boot.util/info "Add version.properties...\n")
   (with-pre-wrap [fileset]
+    (boot.util/info "Add version.properties...\n")
     (-> fileset
         (add-resource (java.io.File. ".") :include #{#"^version\.properties$"})
         commit!)))
@@ -107,7 +107,8 @@
 (defmethod options [:frontend :prod] [selection]
   {:env {:source-paths #{"src/cljs" "env/prod/cljs"}
          :resource-paths #{"resources/public"}}
-   :build-task (comp (cljs :optimizations :advanced
+   :build-task (comp (version-file)
+                     (cljs :optimizations :advanced
                            :source-map true
                            :compiler-options {:closure-defines {"goog.DEBUG" false}
                                               :optimize-constants true
@@ -116,16 +117,15 @@
                                               :pretty-print false
                                               :source-map-timestamp true
                                               :parallel-build true})
-                     (version-file)
                      ;; AR - main.out is needed for source maps!
                      ;; (sift :include #{#"\.out"} :invert true)
                      (target))
    :dev-task identity})
 
 (def backend-build-task
-  (comp (aot :all true)
+  (comp (version-file)
+        (aot :all true)
         (uber)
-        (version-file)
         (jar :main 'lambdax-web.core
              :file "lambdax-web-standalone.jar")
         (target)))
