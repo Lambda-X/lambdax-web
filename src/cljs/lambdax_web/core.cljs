@@ -53,7 +53,9 @@
 (om/add-root! reconciler views/RootView (gdom/getElement "app"))
 
 ;; AR - TODO let's improve this please
-(transit-get (get-in config/defaults [:events :url]) (partial merge-events reconciler))
-
-(js/setInterval #(transit-get (get-in config/defaults [:events :url]) (partial merge-events reconciler))
-                (get-in config/defaults [:events :interval]))
+(let [config config/defaults
+      url (get-in config [:events :url])
+      interval (get-in config [:events :interval])
+      cb (partial merge-events reconciler)]
+  (transit-get url cb)
+  (js/setInterval #(transit-get url cb) interval))

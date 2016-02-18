@@ -5,7 +5,7 @@
             [clj-time.coerce :as c]
             [clojure.string :as string]
             [lambdax-web.config :as config]
-            [clj-rome.reader :refer :all])
+            [clj-rome.reader :as rome])
   (:import [java.text SimpleDateFormat]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
@@ -55,7 +55,7 @@
 (defn rss-feeds
   "Getting all rss feeds from blog"
   [rss-url]
-  (build-feed rss-url))
+  (rome/build-feed rss-url))
 
 (def rss-keys-to-select [:description :title :author :published-date :link])
 
