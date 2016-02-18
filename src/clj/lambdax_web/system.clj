@@ -11,29 +11,28 @@
             [clojure.java.io :as io])
   (:import java.util.Properties))
 
-(defn fetch-version!
-  "Collects the version from version.properties, returns the config with
-  added :version or passes it through if some error happened."
-  [config]
-  ;; AR - A bit messy, cause it's Java!
-  (if-let [version (-> (doto (Properties.)
-                         ;; side effect
-                         (.load (try
-                                  (some->> (if (= :prod (:build config))
-                                             (io/resource "version.properties")
-                                             (io/file "version.properties"))
-                                           (io/input-stream))
-                                  (catch java.io.FileNotFoundException ex
-                                    (println "Handled exception -" (.getMessage ex))))))
-                       (.getProperty "VERSION"))]
-    (assoc config :version version)
-    config))
+(defn version!
+  "Return the current version from the version.properties file."
+  []
+  (let [props (Properties.)]
+    (try
+      ;; side effect
+      (some->> "version.properties"
+               io/resource
+               io/reader
+               (.load props))
+      (catch java.io.FileNotFoundException ex
+        (println "Handled exception -" (.getMessage ex)))) 
+    (.getProperty props "VERSION")))
 
 (defn make-config
   "Creates a default configuration map"
   []
   (-> config/defaults
-      (fetch-version!)
+      (assoc :version
+             (if-let [version (version!)]
+               version
+               "no version found"))
       (merge (into {} [(some->> (:lambdax-web-version env) (hash-map :version))
                        (some->> (:lambdax-web-port env) (Integer/parseInt) (hash-map :port))
                        (some->> (:lambdax-web-nrepl-port env) (Integer/parseInt) (hash-map :nrepl-port))
