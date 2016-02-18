@@ -6,7 +6,7 @@
   (let [baos (ByteArrayOutputStream. 4096)
         _ (-> (t/writer baos :json {})
               (t/write data))
-        ret (.toString baos)]
+        ret (.toString baos "UTF-8")]
     (.reset baos)
     ret))
 
