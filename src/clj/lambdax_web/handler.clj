@@ -23,8 +23,7 @@
         (assoc-in [:headers "Access-Control-Allow-Origin"] domain))))
 
 (defn events [{:keys [app-state]}]
-  (let [events (:events @app-state)]
-    (or (seq events) "No events available")))
+  (vec (:events @app-state)))
 
 (def routes
   [""  {"/" :index

@@ -21,10 +21,11 @@
   (.send XhrIo url
          (fn [e]
            (this-as this
-                    (let [response-string (.getResponseText this)]
-                      (if (s/blank? response-string)
-                        (.log js/console "Empty result")
-                        (cb (t/read (t/reader :json) response-string))))))
+             (let [response (.getResponse this)]
+               (.debug js/console "Response was\n" response)
+               (cb (if (s/blank? response)
+                     []
+                     (t/read (t/reader :json) response))))))
          "GET"))
 
 (defn map->form-str [data]
