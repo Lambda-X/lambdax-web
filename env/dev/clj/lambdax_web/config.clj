@@ -4,13 +4,14 @@
 
 (def defaults
   {:name "LamdbaX Website Backend (DEV)"
-   :fetch-interval 4000
+   :fetch-interval 600000 ;; milliseconds
    :build :dev
    :nrepl-port 0 ;; auto select
    :port 3000
+   :access-domain "*"
    :feeds {:lambdax-blog {:name "LambdaX Blog RSS"
                           :type :rss
-                          :url "http://de139ge9we8jv.cloudfront.net/blog/feed.xml"}
+                          :url "http://dev.lambdax.io/blog/feed.xml"}
            :lambdax-twitter {:name "LambdaX Twitter Timeline"
                              :type :twitter
                              :user "scalac_io"

@@ -13,23 +13,30 @@
 (defn wrap-transit-response [handler]
   (fn [req]
     {:status 200
-     :headers {"Content-Type" "application/transit+json"}
+     :headers {"Content-Type" "application/transit+json;charset=utf-8"}
      :body (-> req handler util/write-transit)}))
 
+(defn wrap-cors [handler domain]
+  (fn [req]
+    (-> req
+        handler
+        (assoc-in [:headers "Access-Control-Allow-Origin"] domain))))
+
 (defn events [{:keys [app-state]}]
-  (let [events (:events @app-state)]
-    (or (seq events) "No events available")))
+  (vec (:events @app-state)))
 
 (def routes
   [""  {"/" :index
         "/events"
         {:get {[""] :events}}}])
 
-(def match->handler
+(defn get-match->handler [access-domain]
   {:index index
-   :events (wrap-transit-response events)})
+   :events (-> events
+               wrap-transit-response
+               (wrap-cors access-domain))})
 
-(defn route-handler [{:keys [uri request-method] :as req}]
+(defn route-handler [match->handler {:keys [uri request-method] :as req}]
   (let [match (bidi/match-route routes uri :request-method request-method)]
     (if-let [handler (match->handler (:handler match))]
       ;; if handler is found call it on request
@@ -60,7 +67,8 @@
 
   In the middleware chain, pre-middleware will preceed the main handler,
   whereas post-middleware will follow."
-  [pre-middleware post-middleware app-state]
-  (-> (post-middleware route-handler)
+  [pre-middleware post-middleware access-domain app-state]
+  (-> (post-middleware (partial route-handler
+                                (get-match->handler access-domain)))
       (wrap-state app-state)
       pre-middleware))
