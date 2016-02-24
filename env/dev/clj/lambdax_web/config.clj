@@ -14,7 +14,7 @@
                           :url "http://dev.lambdax.io/blog/feed.xml"}
            :lambdax-twitter {:name "LambdaX Twitter Timeline"
                              :type :twitter
-                             :user "scalac_io"
+                             :user "lambdax_io"
                              :api-key "xSQw3UZy93DromQMPTkkMNgwT"
                              :api-secret "ABTdn4qhSUKm80x4d9Q0wT1wrm2HUlLcEOFH3Fr0dOgcsyiGFK"
                              :access-token "4849942733-Bhz6FEO4qjw7s16kroRiO924KoLqtbHY0PeSORF"
