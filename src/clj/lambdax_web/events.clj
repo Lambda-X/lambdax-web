@@ -85,12 +85,11 @@
 (defn older-than-month? [blog-post]
   "Is blog post older than month?"
   (-> blog-post
-      first
       :date
       c/from-date
       (t/interval (t/now))
       t/in-months
-      (> 0)))
+      (> 3)))
 
 (defn last-3-events []
   (let [lambdax-blog-rss (get-in config/defaults [:feeds :lambdax-blog :url])
