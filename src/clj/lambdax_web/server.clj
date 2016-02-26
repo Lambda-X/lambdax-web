@@ -21,9 +21,9 @@
                 server (httpkit/run-server handler {:port port})]
             (assoc component :shut-down server)))))
   (stop [component]
-    (when-let [shutdown-fn (:shut-down component)]
+    (when shut-down
       (println "Shutting webserver")
-      (shutdown-fn))
+      (shut-down))
     (dissoc component :shut-down)))
 
 (defn new-server [port build access-domain pre-mw post-mw]

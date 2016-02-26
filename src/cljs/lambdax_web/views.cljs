@@ -193,7 +193,7 @@
                                                           (dom/i #js {:className "fa fa-facebook"}))
                                                    (dom/a #js {:href "https://github.com/Lambda-X" :title "Github" :rel "nofollow"}
                                                           (dom/i #js {:className "fa fa-github-alt"}))
-                                                   (dom/a #js {:href "https://mobile.twitter.com/lambdax_io":title "Twitter" :rel "nofollow"}
+                                                   (dom/a #js {:href "https://twitter.com/lambdax_io":title "Twitter" :rel "nofollow"}
                                                           (dom/i #js {:className "fa fa-twitter"}))))
                                  (dom/div #js {:className "inline-block"}
                                           contact-form)

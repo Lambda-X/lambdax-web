@@ -82,21 +82,20 @@
 ;;;;; Last events ;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
-(defn older-than-month? [blog-post]
+(defn older-than-3-months? [blog-post]
   "Is blog post older than month?"
   (-> blog-post
-      first
       :date
       c/from-date
       (t/interval (t/now))
       t/in-months
-      (> 0)))
+      (> 2)))
 
 (defn last-3-events []
   (let [lambdax-blog-rss (get-in config/defaults [:feeds :lambdax-blog :url])
         lambdax-twitter-user (get-in config/defaults [:feeds :lambdax-twitter :user])
         last-blog-post (last-statuses 1 lambdax-blog-rss)]
-    (->> (if (older-than-month? last-blog-post)
+    (->> (if (older-than-3-months? last-blog-post)
            (last-tweets 3 lambdax-twitter-user)
            (concat (last-tweets 2 lambdax-twitter-user) last-blog-post))
-         (sort-by :date))))
+         (sort-by :date #(compare %2 %1)))))
