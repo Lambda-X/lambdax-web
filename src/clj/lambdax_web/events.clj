@@ -27,7 +27,7 @@
                                   (:access-token twitter-feed)
                                   (:access-token-secret twitter-feed))))
 
-(def tweet-keys-to-select [:text :created_at :screen-name])
+(def tweet-keys-to-select [:text :created_at :screen-name :id])
 
 (defn get-user-screen [user]
   (statuses-user-timeline :oauth-creds my-creds :params {:screen-name user}))
@@ -38,14 +38,14 @@
        :body
        (take number-of-tweets)
        (map
-        #(let [{:keys [text created_at screen-name]}
+        #(let [{:keys [text created_at screen-name id]}
                (select-keys % tweet-keys-to-select)]
            (->Event (str "@" user-name)
                     "TWITTER NEWS!"
                     (string/join " " (-> text (string/split #" ") butlast))
                     (.parse TwitterDateFormat created_at)
                     :tweet
-                    (-> text (string/split #" ") last)
+                    (str "https://twitter.com/lambdax_io/status/" id) 
                     {:src "img/news.png" :alt "news"})))))
 
 
