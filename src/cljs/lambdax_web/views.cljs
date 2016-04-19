@@ -22,9 +22,9 @@
 (defn render-main-section []
   (dom/section #js {:id "main" :className "full-width"}
                (dom/object #js {:data "img/greg.svg"
-                             :id "greg-svg"
-                             :alt "Greg the programmer"
-                             :type "image/svg+xml"})
+                                :id "greg-svg"
+                                :alt "Greg the programmer"
+                                :type "image/svg+xml"})
                (dom/img #js {:src "img/over-greg.svg"
                              :alt "over"
                              :className "hover-image"})))
@@ -55,14 +55,14 @@
                      (if (= (:type content) :text)
                        (dom/p nil (:text content))
                        (dom/a (clj->js {:href (:onclick content)})
-                        (dom/button (clj->js {:className (-> content
-                                                             :text
-                                                             (split #"\s+")
-                                                             (as-> content-text
-                                                                 (->> content-text
-                                                                      (join "-")
-                                                                      (str "btn "))))})
-                                    (:text content))))))))
+                              (dom/button (clj->js {:className (-> content
+                                                                   :text
+                                                                   (split #"\s+")
+                                                                   (as-> content-text
+                                                                       (->> content-text
+                                                                            (join "-")
+                                                                            (str "btn "))))})
+                                          (:text content))))))))
 
 (def render-about-us (om/factory AboutUs {:keyfn :title}))
 
@@ -88,7 +88,7 @@
           (let [{:keys [title tags img url]} (om/props this)]
             (dom/div (clj->js {:className "inline-block"})
                      (dom/a (clj->js {:href url})
-                      (dom/img (clj->js {:src (:src img) :alt (:alt img)})))
+                            (dom/img (clj->js {:src (:src img) :alt (:alt img)})))
                      (dom/p nil title)
                      (dom/p #js {:className "tags"}
                             tags)))))
@@ -186,8 +186,16 @@
                         (dom/div #js {:className "rp-container three-part"}
                                  (dom/div #js {:className "inline-block"})
                                  (dom/div #js {:className "inline-block"}
+                                          (dom/div #js {:className "cooperation"}
+                                                   (dom/p nil "We are open to any form of cooperation.")
+                                                   (dom/p nil "Let us help you with your project.")
+                                                   (dom/p nil "We invite you to check our")
+                                                   (dom/div #js {:className "blog"}
+                                                            (dom/a #js {:href "http://lambdax.io/blog" :title "blog"}
+                                                                   "blog")))
                                           (dom/h2 nil "Connect with us on")
                                           ;;(dom/p nil "You can also catch us up via our social accounts! Observe us to stay in touch.")
+
                                           (dom/div #js {:className "socials"}
                                                    (dom/a #js {:href "http://facebook.com" :title "Facebook" :rel "nofollow"}
                                                           (dom/i #js {:className "fa fa-facebook"}))
@@ -255,9 +263,9 @@
                           (cycle '("light-theme" "dark-theme")))
                      (if message-sent?
                        (render-footer-section
-                            (dom/div #js {:className "message"}
-                                (dom/h2 nil "Thank You")
-                                (dom/p nil "for getting in touch!")))
+                        (dom/div #js {:className "message"}
+                                 (dom/h2 nil "Thank You")
+                                 (dom/p nil "for getting in touch!")))
                        (render-footer-section (render-contact-form
                                                {:submit-message (fn [new-message]
                                                                   (om/transact! this `[(message/send-message! ~new-message)]))})))))))

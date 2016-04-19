@@ -383,7 +383,9 @@ section.slogan {
     position: relative;
 }
 
-.contact .inline-block { vertical-align: middle}
+.contact .inline-block {
+    vertical-align: top
+}
 
 .contact img {
     width: 350px;
@@ -519,7 +521,9 @@ input[type="submit"].btn {
         margin-bottom: 30px;
     }
 
-    .team .rp-container { padding: 0}
+    .team .rp-container {
+        padding: 0
+    }
 
     .news-box, .news-box:nth-of-type(2n), .news-box:nth-of-type(2n+1) {
         width: 100%;
@@ -546,12 +550,49 @@ input[type="submit"].btn {
         margin-bottom: 30px;
     }
 
-    .contact {text-align: center;}
-    .contact .inline-block:first-of-type { display: none}
+    .contact {
+        text-align: center;
+    }
+
+    .contact .inline-block:first-of-type {
+        display: none
+    }
+
     .contact img {
         position: relative;
         margin: auto auto;
         left: initial;
         top: initial;
     }
+}
+
+.cooperation {
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+    width: 33.333;
+}
+
+.cooperation p {
+    margin-bottom: 0px;
+}
+
+.blog {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.blog a {
+    border: 0.5px solid white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 25px;
+    padding-right: 25px;
+    color: white;
+}
+
+.blog-text {
+    margin-top: 0px;
+    padding-top: 0px;
 }
