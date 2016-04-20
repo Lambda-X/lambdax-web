@@ -47,8 +47,7 @@
   (case (get-env :flavor)
     "frontend" (vec (distinct (concat common-deps frontend-deps)))
     "backend" (vec (distinct (concat common-deps backend-deps backend-dev-deps)))
-    (do (boot.util/warn "You need to specify a flavor with -e flavor=frontend|backend for build and dev task to work\n")
-        common-deps)))
+    (throw (ex-info "You need to specify a flavor with -e flavor=frontend|backend for build and dev task to work\n" {:flavor (get-env :flavor)}))))
 
 (set-env! :dependencies deps)
 
