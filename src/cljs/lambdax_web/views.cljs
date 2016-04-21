@@ -118,7 +118,7 @@
   Object
   (render [this]
           (let [{:keys [title text date type author img link]} (om/props this)
-                date (c/from-date date)]
+                date (t/to-default-time-zone (c/from-date date))]
             (dom/div #js {:className "news-box"}
                      (dom/img (clj->js {:src (:src img) :alt (:alt img) :className "inline-block"}))
                      (dom/div #js {:className "inline-block text"}
