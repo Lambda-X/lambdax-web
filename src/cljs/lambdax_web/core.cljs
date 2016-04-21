@@ -22,7 +22,6 @@
          (fn [e]
            (this-as this
              (let [response (.getResponse this)]
-               (.debug js/console "Response was\n" response)
                (cb (if (s/blank? response)
                      []
                      (t/read (t/reader :json) response))))))

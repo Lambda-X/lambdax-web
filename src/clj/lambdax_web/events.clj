@@ -19,7 +19,7 @@
 ;;;;; Twitter feeds ;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(def TwitterDateFormat (SimpleDateFormat. "EE MMM dd HH:mm:ss z yyyy" Locale/ENGLISH))
+(def date-format (SimpleDateFormat. "EE MMM dd HH:mm:ss z yyyy" Locale/ENGLISH))
 
 (def my-creds (let [twitter-feed (get-in config/defaults [:feeds :lambdax-twitter])]
                 (make-oauth-creds (:api-key twitter-feed)
@@ -43,9 +43,9 @@
            (->Event (str "@" user-name)
                     "TWITTER NEWS!"
                     (string/join " " (-> text (string/split #" ") butlast))
-                    (.parse TwitterDateFormat created_at)
+                    (.parse date-format created_at)
                     :tweet
-                    (str "https://twitter.com/lambdax_io/status/" id) 
+                    (str "https://twitter.com/lambdax_io/status/" id)
                     {:src "img/news.png" :alt "news"})))))
 
 
